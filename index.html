@@ -2456,27 +2456,6 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 </section>
 
 
-<!-- ═══════════════ 11. GALERÍA · MAR DE IMÁGENES ═══════════════ -->
-<section id="gallery">
-  <span class="lbl">Nuestra historia</span>
-  <h2 class="ttl">Galería</h2>
-  <div class="gline"></div>
-  <p class="gal-sub"><em>Momentos que atesoramos</em><br>Navega el flujo y toca para ampliar.</p>
-
-  <div class="wheel-scene">
-    <div class="wheel-ring" id="wheel-ring">
-      <div class="wheel-card"><img src="assets/galeria/g01.jpg" alt="Alejandra y Francisco" loading="lazy"></div>
-      <div class="wheel-card"><img src="assets/galeria/g02.jpg" alt="Alejandra y Francisco" loading="lazy"></div>
-      <div class="wheel-card"><img src="assets/galeria/g03.jpg" alt="Alejandra y Francisco" loading="lazy"></div>
-      <div class="wheel-card"><img src="assets/galeria/g04.jpg" alt="Alejandra y Francisco" loading="lazy"></div>
-    </div>
-  </div>
-
-  <p class="gal-hint">Arrastra para girar la rueda · Cada foto un recuerdo</p>
-</section>
-
-
-
 <!-- ═══════════════ 12. RSVP ═════════════════════════ -->
 <section id="rsvp">
   <span class="lbl">Confirmación de asistencia</span>
@@ -2569,7 +2548,6 @@ function launchPage() {
   countdown();
   setInterval(countdown, 1000);
   ambientWind();
-  initGallery();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 
@@ -3011,13 +2989,6 @@ function scrollAnims() {
     scrollTrigger: { trigger: '#album', start: 'top 80%', once: true }
   });
 
-  // Gallery — la corriente ya se anima en CSS; sólo fade-in suave
-  gsap.from('.gal-sea', {
-    opacity: 0, y: 24,
-    duration: .9, ease: 'power3.out',
-    scrollTrigger: { trigger: '#gallery', start: 'top 82%', once: true }
-  });
-
   // RSVP form fields
   gsap.from(['#rsvpGreet','#fg2','#fg4'], {
     opacity: 0, y: 18, duration: .55, stagger: .12, ease,
@@ -3302,68 +3273,6 @@ function ambientWind() {
   }
 
   for (let i = 0; i < 8; i++) setTimeout(spawn, i * 900);
-}
-
-/* ── GALLERY · RUEDA 3D CON DRAG + INERCIA ───────────── */
-function initGallery() {
-  const ring = document.getElementById('wheel-ring');
-  if (!ring) return;
-  const cards = ring.querySelectorAll('.wheel-card');
-  const n = cards.length;
-  if (!n) return;
-
-  const radius = 230;
-  let rot = 0, vel = 0, isDrag = false;
-  let startX = 0, startRot = 0, lastX = 0, rafId = null;
-
-  cards.forEach((card, i) => {
-    card.style.transform = `rotateY(${(360 / n) * i}deg) translateZ(${radius}px)`;
-  });
-
-  function setRot(){ gsap.set(ring, { rotateY: rot }); }
-  setRot();
-
-  function inertia(){
-    if (isDrag) return;
-    rot += vel; vel *= 0.94;
-    setRot();
-    if (Math.abs(vel) > 0.05) rafId = requestAnimationFrame(inertia);
-  }
-
-  function pointerDown(x){
-    isDrag = true; auto = false;
-    ring.classList.add('dragging');
-    startX = x; lastX = x; startRot = rot; vel = 0;
-    if (rafId) cancelAnimationFrame(rafId);
-  }
-  function pointerMove(x){
-    if (!isDrag) return;
-    const dx = x - startX;
-    rot = startRot + dx * 0.45;
-    vel = (x - lastX) * 0.5;
-    lastX = x;
-    setRot();
-  }
-  function pointerUp(){
-    if (!isDrag) return;
-    isDrag = false;
-    ring.classList.remove('dragging');
-    rafId = requestAnimationFrame(inertia);
-  }
-
-  ring.addEventListener('mousedown',  e => { e.preventDefault(); pointerDown(e.clientX); });
-  window.addEventListener('mousemove', e => pointerMove(e.clientX));
-  window.addEventListener('mouseup',   pointerUp);
-  ring.addEventListener('touchstart', e => pointerDown(e.touches[0].clientX), { passive: true });
-  ring.addEventListener('touchmove',  e => pointerMove(e.touches[0].clientX), { passive: true });
-  ring.addEventListener('touchend',   pointerUp);
-
-  // Giro automático lento hasta el primer arrastre
-  let auto = true;
-  (function spin(){
-    if (auto && !isDrag) { rot += 0.12; setRot(); }
-    requestAnimationFrame(spin);
-  })();
 }
 
 /* ── TOAST ───────────────────────────────────────────── */
