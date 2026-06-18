@@ -275,26 +275,26 @@ section{padding:64px 22px}
 }
 .h-bg img{
   width:100%;height:100%;object-fit:cover;object-position:center 35%;
-  filter:brightness(1.02) saturate(.82) contrast(.92);
+  filter:brightness(1.04) saturate(1) contrast(1);
   display:block;
 }
 
-/* Gradient overlay — reforzado para máxima legibilidad del texto */
+/* Gradient overlay — ligero, deja la foto protagonista */
 .h-ov{
   position:absolute;inset:0;z-index:1;
   background:
     linear-gradient(to bottom,
-      rgba(255,255,255,.68) 0%,
-      rgba(250,247,236,.48) 32%,
-      rgba(250,247,236,.62) 62%,
-      rgba(250,247,236,.97) 100%);
+      rgba(255,255,255,.18) 0%,
+      rgba(250,247,236,.08) 32%,
+      rgba(250,247,236,.22) 62%,
+      rgba(250,247,236,.85) 100%);
 }
-/* Halo radial detrás del nombre — más presente */
+/* Halo radial detrás del nombre — sutil, solo para legibilidad */
 .h-ov::after{
   content:'';position:absolute;
   left:50%;top:48%;transform:translate(-50%,-50%);
   width:96%;max-width:460px;aspect-ratio:1;
-  background:radial-gradient(circle, rgba(255,255,255,.78) 0%, rgba(250,247,236,.45) 40%, transparent 68%);
+  background:radial-gradient(circle, rgba(250,247,236,.42) 0%, rgba(250,247,236,.18) 40%, transparent 68%);
   pointer-events:none;
 }
 
