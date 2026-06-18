@@ -2598,6 +2598,9 @@ function initEnvelope() {
     if (opened) return;
     opened = true;
 
+    // Música — autoplay aprovechando el gesto del usuario al abrir el sobre
+    try { if (typeof toggleMusic === 'function' && !playing) toggleMusic(); } catch(_) {}
+
     gsap.to(hint, { opacity: 0, duration: .35, ease: 'power2.out' });
 
     vid.style.display = 'block';
