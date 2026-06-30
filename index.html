@@ -97,7 +97,7 @@ section{padding:64px 22px}
   width:7px;height:11px;
   background:radial-gradient(ellipse at 30% 35%, #ad7171, #470202 75%);
   border-radius:60% 0 60% 0;
-  box-shadow:0 0 4px rgba(74,99,62,.4);
+  box-shadow:0 0 4px rgba(71,2,2,.4);
   opacity:.55;
 }
 /* Variante 3: punto cremoso (motita de luz) */
@@ -145,7 +145,7 @@ section{padding:64px 22px}
   position:absolute;bottom:8vh;left:50%;
   transform:translateX(-50%);
   z-index:3;
-  color:#2A2F1C;
+  color:var(--olive);
   font-family:'Cormorant Garamond',serif;
   font-weight:600;
   font-size:13px;letter-spacing:5px;text-transform:uppercase;
@@ -238,7 +238,7 @@ section{padding:64px 22px}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ── HELPERS ──────────────────────────────────────────── */
-.lbl{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--olive);text-align:center;display:block;font-weight:600}
+.lbl{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);text-align:center;display:block;font-weight:700}
 .ttl{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500;text-align:center;color:var(--cream);line-height:1.25;margin-top:6px}
 .gline{width:50px;height:1px;background:linear-gradient(to right,transparent,var(--olive),transparent);margin:18px auto}
 
@@ -268,33 +268,17 @@ section{padding:64px 22px}
   position:relative;overflow:hidden;padding:48px 28px 88px;
 }
 
-/* Background photo */
-.h-bg{
-  position:absolute;top:-20%;left:0;right:0;bottom:-20%;
-  z-index:0;will-change:transform;
-}
-.h-bg img{
-  width:100%;height:100%;object-fit:cover;object-position:center 60%;
-  filter:brightness(1.04) saturate(1) contrast(1);
-  display:block;
-}
-
-/* Gradient overlay — ligero, deja la foto protagonista */
-.h-ov{
-  position:absolute;inset:0;z-index:1;
+/* Fondo plano del hero (sin foto) — capas suaves crema/dorado */
+.h-bg-plain{
+  position:absolute;inset:0;z-index:0;
   background:
-    linear-gradient(to bottom,
-      rgba(255,255,255,.18) 0%,
-      rgba(250,247,236,.08) 32%,
-      rgba(250,247,236,.22) 62%,
-      rgba(250,247,236,.85) 100%);
+    radial-gradient(ellipse at 30% 20%, rgba(161,122,22,.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 75%, rgba(173,113,113,.10) 0%, transparent 55%),
+    linear-gradient(180deg, #faf3e3 0%, #f5ead0 60%, #ecd9bb 100%);
 }
-/* Halo radial detrás del nombre — sutil, solo para legibilidad */
-.h-ov::after{
-  content:'';position:absolute;
-  left:50%;top:48%;transform:translate(-50%,-50%);
-  width:96%;max-width:460px;aspect-ratio:1;
-  background:radial-gradient(circle, rgba(250,247,236,.42) 0%, rgba(250,247,236,.18) 40%, transparent 68%);
+.h-bg-plain::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 48%, rgba(255,250,232,.55) 0%, transparent 60%);
   pointer-events:none;
 }
 
@@ -385,12 +369,12 @@ section{padding:64px 22px}
   font-size:42px;
   letter-spacing:4px;
   text-transform:uppercase;
-  color:#2A2F1C;
+  color:var(--olive);
   display:block;
   text-shadow:
     0 2px 22px rgba(255,255,255,1),
     0 0 40px rgba(255,255,255,.85),
-    0 4px 28px rgba(74,99,62,.35),
+    0 4px 28px rgba(71,2,2,.35),
     0 1px 2px rgba(42,58,34,.3);
   will-change:transform,opacity,filter;
   transform-origin:center center;
@@ -464,7 +448,7 @@ section{padding:64px 22px}
   font-family:'Cormorant Garamond',serif;
   font-weight:700;
   font-size:20px;letter-spacing:4px;text-transform:uppercase;
-  color:#2A2F1C;
+  color:var(--olive);
   text-shadow:0 1px 8px rgba(255,255,255,.9);
 }
 .h-city{
@@ -537,7 +521,7 @@ section{padding:64px 22px}
 #location::after{
   content:'';position:absolute;pointer-events:none;
   top:0;left:0;right:0;height:1px;
-  background:linear-gradient(to right, transparent, rgba(74,99,62,.18), transparent);
+  background:linear-gradient(to right, transparent, rgba(71,2,2,.18), transparent);
 }
 #location > *{position:relative;z-index:1}
 
@@ -761,7 +745,7 @@ section{padding:64px 22px}
   overflow:visible;
 }
 .tl-svg-bg{
-  stroke:rgba(74,99,62,.22);
+  stroke:rgba(71,2,2,.22);
   stroke-width:1.2;fill:none;
   stroke-dasharray:3 7;
   animation:tlBgFlow 9s linear infinite;
@@ -936,7 +920,7 @@ section{padding:64px 22px}
     radial-gradient(circle 320px at 30% 48%, rgba(212,197,178,.32) 0%, transparent 75%),
     radial-gradient(circle 260px at 86% 62%, rgba(235,224,169,.38) 0%, transparent 72%),
     radial-gradient(circle 240px at 18% 82%, rgba(136,158,101,.18) 0%, transparent 72%),
-    radial-gradient(circle 200px at 70% 92%, rgba(74,99,62,.12)  0%, transparent 75%),
+    radial-gradient(circle 200px at 70% 92%, rgba(71,2,2,.12)  0%, transparent 75%),
     linear-gradient(180deg, #fcf8e6 0%, var(--ink) 50%, #faf3d8 100%);
   overflow:hidden;position:relative;
 }
@@ -1063,7 +1047,7 @@ section{padding:64px 22px}
 }
 .fam-medal-icon svg{
   width:36px;height:36px;
-  filter:drop-shadow(0 1px 2px rgba(74,99,62,.25));
+  filter:drop-shadow(0 1px 2px rgba(71,2,2,.25));
 }
 
 /* Rol */
@@ -1154,7 +1138,7 @@ section{padding:64px 22px}
   overflow:hidden;
   border:2px solid rgba(235,224,169,.55);
   box-shadow:
-    0 18px 50px -10px rgba(74,99,62,.45),
+    0 18px 50px -10px rgba(71,2,2,.45),
     0 0 0 1px rgba(255,255,255,.6) inset;
   user-select:none;-webkit-user-select:none;
   background:var(--ink2);
@@ -1201,7 +1185,7 @@ section{padding:64px 22px}
   content:'';position:absolute;pointer-events:none;
   inset:0;z-index:0;
   background:
-    radial-gradient(ellipse 60% 40% at 0% 0%,   rgba(74,99,62,.18)  0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 0% 0%,   rgba(71,2,2,.18)  0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 100% 0%, rgba(136,158,101,.20) 0%, transparent 60%);
 }
 #rsvp::after{
@@ -1223,14 +1207,14 @@ section{padding:64px 22px}
 
 .rsvp-greet{
   text-align:center;margin:0 auto 26px;max-width:340px;
-  padding:22px 18px;border:1px solid rgba(74,99,62,.22);border-radius:14px;
+  padding:22px 18px;border:1px solid rgba(71,2,2,.22);border-radius:14px;
   background:linear-gradient(180deg, rgba(235,224,169,.18), rgba(255,255,255,.0));
 }
 .rsvp-greet-lbl{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--olive);margin-bottom:10px;font-weight:700}
 .rsvp-greet-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--cream);line-height:1.25;margin-bottom:10px}
 .rsvp-greet-pases{font-size:16px;letter-spacing:1.5px;text-transform:uppercase;color:var(--olive);font-weight:700}
 .rsvp-greet-pases #rsvpPases{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--olive);letter-spacing:0;margin-right:6px}
-.rsvp-greet.confirmed{background:linear-gradient(180deg, rgba(74,99,62,.16), rgba(255,255,255,0));border-color:var(--olive)}
+.rsvp-greet.confirmed{background:linear-gradient(180deg, rgba(71,2,2,.16), rgba(255,255,255,0));border-color:var(--olive)}
 
 /* Mensaje "Solo adultos" al pie del RSVP */
 .rsvp-adults{
@@ -1347,7 +1331,7 @@ section{padding:64px 22px}
     radial-gradient(circle at 15% 18%, rgba(235,224,169,.45) 0%, transparent 35%),
     radial-gradient(circle at 88% 22%, rgba(136,158,101,.18) 0%, transparent 38%),
     radial-gradient(circle at 78% 78%, rgba(212,197,178,.32) 0%, transparent 40%),
-    radial-gradient(circle at 18% 82%, rgba(74,99,62,.10) 0%, transparent 42%),
+    radial-gradient(circle at 18% 82%, rgba(71,2,2,.10) 0%, transparent 42%),
     radial-gradient(circle at 50% 50%, rgba(235,224,169,.18) 0%, transparent 55%);
   filter:blur(2px);
 }
@@ -1758,6 +1742,202 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 }
 
 /* ═══════════════════════════════════════════════════════
+   CITA NERUDA — editorial, tonos cálidos
+   ═══════════════════════════════════════════════════════ */
+#neruda{
+  background:linear-gradient(180deg, #f7ebd2 0%, #efdfb8 60%, #e8d3a4 100%);
+  padding:72px 28px 80px;text-align:center;
+  position:relative;overflow:hidden;
+}
+#neruda::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(161,122,22,.10) 0%, transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(173,113,113,.12) 0%, transparent 60%);
+  pointer-events:none;
+}
+.ne-orn-top,.ne-orn-bot{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin:0 auto;max-width:280px;position:relative;z-index:2;
+}
+.ne-orn-bot{margin-top:30px}
+.ne-orn-top{margin-bottom:28px}
+.ne-line{
+  flex:1;height:1px;
+  background:linear-gradient(to right, transparent, rgba(161,122,22,.55), transparent);
+}
+.ne-dot{
+  color:var(--gold);font-size:13px;letter-spacing:6px;
+}
+.ne-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:21px;line-height:1.7;font-style:italic;
+  color:#3a1a08;font-weight:500;
+  max-width:340px;margin:0 auto;
+  position:relative;z-index:2;
+  letter-spacing:.2px;
+}
+.ne-quote em{
+  font-family:'Great Vibes',cursive;
+  font-style:normal;
+  color:var(--olive);
+  font-size:30px;letter-spacing:1px;
+  line-height:1;
+  padding:0 4px;
+}
+.ne-author{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);font-weight:700;
+  margin-top:24px;position:relative;z-index:2;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CALENDARIO VISUAL — mes con día destacado
+   ═══════════════════════════════════════════════════════ */
+.cal-month{
+  margin:28px auto 26px;max-width:340px;
+  background:rgba(255,255,255,.65);
+  border:1px solid rgba(173,113,113,.22);
+  border-radius:14px;
+  padding:20px 16px 22px;
+  box-shadow:0 8px 28px rgba(71,2,2,.06);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.cal-month-title{
+  font-family:'Great Vibes',cursive;
+  font-size:36px;color:var(--gold);
+  text-align:center;line-height:1;
+  margin-bottom:18px;
+}
+.cal-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:4px;
+}
+.cal-dow{
+  font-family:'Lato',sans-serif;
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;
+  color:var(--olive);text-align:center;
+  padding:6px 0;opacity:.78;
+}
+.cal-day{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;color:var(--cream);
+  text-align:center;
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-weight:500;
+}
+.cal-day.empty{opacity:0}
+.cal-day.is-today{
+  position:relative;color:#fff;font-weight:700;
+}
+.cal-day.is-today::before{
+  content:'';position:absolute;inset:4px;
+  background:radial-gradient(circle at 35% 30%, #6b1a1a, #470202 70%);
+  border-radius:50%;
+  box-shadow:0 4px 14px rgba(71,2,2,.45), inset 0 0 0 1px rgba(255,255,255,.15);
+  z-index:-1;
+}
+.cal-day.is-today{z-index:1}
+.cal-foot{
+  margin-top:14px;text-align:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  color:var(--olive);font-size:14px;opacity:.78;letter-spacing:.5px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PADRINOS CARRUSEL — paginado, evita lista larga
+   ═══════════════════════════════════════════════════════ */
+.padr-carousel{
+  margin:24px -22px 0;
+  position:relative;
+}
+.padr-track{
+  display:flex;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;-ms-overflow-style:none;
+  padding:18px 22px 6px;gap:14px;
+}
+.padr-track::-webkit-scrollbar{display:none}
+.padr-slide{
+  flex:0 0 88%;max-width:340px;
+  scroll-snap-align:center;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(173,113,113,.2);
+  border-radius:16px;
+  padding:26px 22px 28px;
+  text-align:center;
+  box-shadow:0 6px 22px rgba(71,2,2,.08);
+}
+.padr-slide-icon{
+  width:46px;height:46px;margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);
+}
+.padr-slide-role{
+  font-family:'Lato',sans-serif;
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--olive-accent);font-weight:700;
+  margin-bottom:10px;
+}
+.padr-slide-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:21px;color:var(--cream);line-height:1.35;
+  font-weight:600;
+  max-width:280px;margin:0 auto;
+}
+.padr-bullets{
+  display:flex;justify-content:center;gap:8px;margin:14px 0 0;
+}
+.padr-bullet{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(173,113,113,.3);
+  border:none;cursor:pointer;padding:0;
+  transition:all .3s var(--spring);
+}
+.padr-bullet.active{
+  background:var(--olive);
+  transform:scale(1.35);
+}
+.padr-hint{
+  text-align:center;margin-top:14px;
+  font-family:'Lato',sans-serif;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--olive);opacity:.55;font-weight:600;
+}
+
+/* ═══════════════════════════════════════════════════════
+   FOTOS FINALES — galería simple antes del footer
+   ═══════════════════════════════════════════════════════ */
+#fotos-final{
+  background:linear-gradient(180deg, var(--ink2) 0%, #f0e3c0 100%);
+  padding:64px 22px 56px;text-align:center;
+}
+.ff-grid{
+  display:flex;flex-direction:column;gap:18px;
+  margin-top:32px;align-items:center;
+}
+.ff-card{
+  width:100%;max-width:340px;
+  border-radius:14px;overflow:hidden;
+  border:6px solid #fff;
+  box-shadow:0 12px 32px rgba(71,2,2,.16), 0 0 0 1px rgba(173,113,113,.25);
+  transform:rotate(-1deg);
+  transition:transform .4s var(--spring);
+}
+.ff-card:nth-child(2){transform:rotate(1.2deg)}
+.ff-card:nth-child(3){transform:rotate(-.6deg)}
+.ff-card:active{transform:rotate(0) scale(.99)}
+.ff-card img{
+  display:block;width:100%;height:auto;
+}
+.ff-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:16px;color:var(--olive);opacity:.85;font-weight:500;
+  margin-top:14px;line-height:1.6;
+}
+
+/* ═══════════════════════════════════════════════════════
    SOBRE INTERACTIVO (lluvia de sobres — clonado de fabiola)
    ═══════════════════════════════════════════════════════ */
 .gf-env-wrap{
@@ -1913,12 +2093,8 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 
 <!-- ═══════════════ 1. HERO ════════════════════════════ -->
 <section id="hero">
-  <!-- Background photo (parallax target) -->
-  <div class="h-bg" id="heroBg">
-    <img src="assets/hero.jpg"
-         alt="Alejandra y Francisco" loading="eager" id="heroPic">
-  </div>
-  <div class="h-ov"></div>
+  <!-- Fondo decorativo (sin foto, solo tono crema editorial) -->
+  <div class="h-bg-plain" aria-hidden="true"></div>
   <div class="h-frame"></div>
 
   <!-- Ondas de viento superior e inferior -->
@@ -1980,6 +2156,29 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   <div class="h-scroll" id="hScroll">
     <div class="h-scroll-line"></div>
     <span>Desliza</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════ 1B. CITA NERUDA ══════════════════ -->
+<section id="neruda">
+  <div class="ne-orn-top" aria-hidden="true">
+    <span class="ne-line"></span>
+    <span class="ne-dot">✦</span>
+    <span class="ne-line"></span>
+  </div>
+  <blockquote class="ne-quote">
+    “Entonces te das cuenta, que no es quien te mueve el piso,<br>
+    sino quien te <em>centra</em>.<br>
+    No es quien te roba el corazón,<br>
+    sino quien te hace sentir<br>
+    que lo tienes de vuelta.”
+  </blockquote>
+  <p class="ne-author">— Pablo Neruda</p>
+  <div class="ne-orn-bot" aria-hidden="true">
+    <span class="ne-line"></span>
+    <span class="ne-dot">✦</span>
+    <span class="ne-line"></span>
   </div>
 </section>
 
@@ -2162,6 +2361,51 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   <h2 class="ttl" style="font-size:26px">Guarda la Fecha</h2>
   <div class="gline"></div>
   <p class="cal-sub">Agrega nuestra boda a tu calendario<br>para no perderte ni un momento.</p>
+
+  <div class="cal-month" aria-label="28 de Noviembre de 2026">
+    <p class="cal-month-title">Noviembre</p>
+    <div class="cal-grid">
+      <span class="cal-dow">Dom</span>
+      <span class="cal-dow">Lun</span>
+      <span class="cal-dow">Mar</span>
+      <span class="cal-dow">Mié</span>
+      <span class="cal-dow">Jue</span>
+      <span class="cal-dow">Vie</span>
+      <span class="cal-dow">Sáb</span>
+      <span class="cal-day">1</span>
+      <span class="cal-day">2</span>
+      <span class="cal-day">3</span>
+      <span class="cal-day">4</span>
+      <span class="cal-day">5</span>
+      <span class="cal-day">6</span>
+      <span class="cal-day">7</span>
+      <span class="cal-day">8</span>
+      <span class="cal-day">9</span>
+      <span class="cal-day">10</span>
+      <span class="cal-day">11</span>
+      <span class="cal-day">12</span>
+      <span class="cal-day">13</span>
+      <span class="cal-day">14</span>
+      <span class="cal-day">15</span>
+      <span class="cal-day">16</span>
+      <span class="cal-day">17</span>
+      <span class="cal-day">18</span>
+      <span class="cal-day">19</span>
+      <span class="cal-day">20</span>
+      <span class="cal-day">21</span>
+      <span class="cal-day">22</span>
+      <span class="cal-day">23</span>
+      <span class="cal-day">24</span>
+      <span class="cal-day">25</span>
+      <span class="cal-day">26</span>
+      <span class="cal-day">27</span>
+      <span class="cal-day is-today">28</span>
+      <span class="cal-day">29</span>
+      <span class="cal-day">30</span>
+    </div>
+    <p class="cal-foot">Sábado · El gran día</p>
+  </div>
+
   <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Alejandra+%26+Francisco&dates=20261128T174500/20261129T030000&details=Ceremonia+Religiosa+5:45+PM+en+Templo+de+Santa+Rosa+de+Lima+y+Recepci%C3%B3n+8:00+PM+en+Hacienda+Tanganxoan.&location=Templo+de+Santa+Rosa+de+Lima%2C+Morelia%2C+Michoacan"
      target="_blank" rel="noopener" id="calBtn"
      class="btn btn-olive" style="max-width:310px;margin:0 auto;display:flex;opacity:1">
@@ -2237,55 +2481,10 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   <div class="gline"></div>
   <p class="gf-sub">Si deseas obsequiarnos algo especial,<br>compartimos contigo nuestras opciones.</p>
 
-  <div class="gf-env-wrap">
-    <button class="gift-envelope" type="button" aria-expanded="false" aria-label="Toca para abrir el sobre">
-      <span class="env-glow" aria-hidden="true"></span>
-
-      <svg class="env-body-svg" viewBox="0 0 300 230" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="af-env-fill" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stop-color="#FBF8F0"/>
-            <stop offset="100%" stop-color="#EFE4D1"/>
-          </linearGradient>
-          <linearGradient id="af-env-flap-fill" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stop-color="#E6D5C1"/>
-            <stop offset="100%" stop-color="#FBF8F0"/>
-          </linearGradient>
-        </defs>
-        <rect class="env-rect" x="18" y="60" width="264" height="152" rx="10"
-              fill="url(#af-env-fill)" stroke="#ad7171" stroke-width="1.5"/>
-        <path d="M18 212 L150 122 L282 212" stroke="rgba(173,113,113,.55)" stroke-width="1" fill="none"/>
-        <line x1="100" y1="34" x2="100" y2="22" stroke="#ad7171" stroke-width="1.3" stroke-linecap="round" opacity=".55"/>
-        <line x1="150" y1="28" x2="150" y2="14" stroke="#470202" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-        <line x1="200" y1="34" x2="200" y2="22" stroke="#ad7171" stroke-width="1.3" stroke-linecap="round" opacity=".55"/>
-        <line x1="125" y1="22" x2="125" y2="12" stroke="#a17a16" stroke-width="1" stroke-linecap="round" opacity=".55"/>
-        <line x1="175" y1="22" x2="175" y2="12" stroke="#a17a16" stroke-width="1" stroke-linecap="round" opacity=".55"/>
-        <circle class="env-seal" cx="150" cy="138" r="20"
-                fill="rgba(71,2,2,.10)" stroke="#470202" stroke-width="1.2"/>
-        <text x="150" y="144" text-anchor="middle"
-              font-family="Cormorant Garamond, Georgia, serif" font-size="14" font-style="italic"
-              fill="#470202" opacity=".88">A&amp;F</text>
-      </svg>
-
-      <div class="env-flap-wrap" aria-hidden="true">
-        <svg viewBox="0 0 264 110" preserveAspectRatio="none">
-          <path d="M0 0 L132 110 L264 0 Z"
-                fill="url(#af-env-flap-fill)" stroke="#ad7171" stroke-width="1.5" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </button>
-
-    <div class="env-open-content" aria-live="polite">
-      <p class="env-name">Lluvia de Sobres</p>
-      <p class="env-desc">Si lo prefieres, trae tu sobre el día de la boda. Tendremos una urna donde podrás depositarlo con todo cariño.</p>
-    </div>
-    <p class="env-tap-hint">Toca el sobre</p>
-  </div>
-
   <div class="gf-card gf-bank">
     <div class="gf-card-top">
-      <div class="gf-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
-      <p class="gf-ttl">Liverpool</p>
+      <div class="gf-logo" style="background:rgba(161,122,22,.12);color:var(--gold);border-color:rgba(161,122,22,.32)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+      <p class="gf-ttl" style="color:var(--gold)">Liverpool</p>
     </div>
     <div class="gf-bank-info">
       <p class="gf-bk-line"><span class="gf-bk-lbl">Mesa</span><span class="gf-bk-val">Alejandra &amp; Francisco</span></p>
@@ -2296,6 +2495,24 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
       <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52017212" target="_blank" rel="noopener" class="btn gf-copy">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         Abrir Mesa en Liverpool
+      </a>
+    </div>
+  </div>
+
+  <div class="gf-card gf-bank" style="margin-top:18px">
+    <div class="gf-card-top">
+      <div class="gf-logo" style="background:rgba(173,113,113,.12);color:var(--olive-accent);border-color:rgba(173,113,113,.32)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18l-1.5 11a2 2 0 01-2 1.7H6.5a2 2 0 01-2-1.7L3 9z"/><path d="M8 9V6a4 4 0 018 0v3"/></svg></div>
+      <p class="gf-ttl" style="color:var(--olive-accent)">Amazon</p>
+    </div>
+    <div class="gf-bank-info">
+      <p class="gf-bk-line"><span class="gf-bk-lbl">Lista</span><span class="gf-bk-val">Alejandra &amp; Francisco</span></p>
+      <p class="gf-bk-line gf-bk-clabe-wrap">
+        <span class="gf-bk-lbl">Mesa de Bodas</span>
+        <span class="gf-bk-clabe">amazon.com.mx</span>
+      </p>
+      <a href="https://www.amazon.com.mx/wedding/guest-view/XX1T3FMIWFHU" target="_blank" rel="noopener" class="btn gf-copy">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ver Mesa en Amazon
       </a>
     </div>
   </div>
@@ -2391,62 +2608,60 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
     </div>
 
     <p class="fam-group-title">Nuestros Padrinos</p>
-
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Padrinos de Velación</p>
-      <p class="fam-names">Mario Alberto González Borbolla<span class="fam-amp">&amp;</span>Lorena Torres Martínez</p>
-    </div>
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Padrino de Anillos</p>
-      <p class="fam-names">José Luis Torres Zaragoza</p>
-    </div>
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Padrinos de Arras</p>
-      <p class="fam-names">Santiago Torres Rodríguez<span class="fam-amp">&amp;</span>Ylva Gotberg</p>
-    </div>
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Padrinos de Lazo</p>
-      <p class="fam-names">Xóchitl Janette Villa Vázquez<span class="fam-amp">&amp;</span>Víctor Hugo Bolaños Abraham</p>
-    </div>
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Madrina de Biblia y Rosario</p>
-      <p class="fam-names">Miriam Villa Vázquez</p>
-    </div>
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Madrina del Cirio</p>
-      <p class="fam-names">Victoria Villa Vázquez</p>
-    </div>
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Madrina de Ramo para la Virgen</p>
-      <p class="fam-names">Ana Torres Martínez</p>
-    </div>
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Padrinos de Brindis</p>
-      <p class="fam-names">Alberto Torres Rodríguez<span class="fam-amp">&amp;</span>Christian Chávez López</p>
-    </div>
-
-    <div class="fam-sep" aria-hidden="true">
-      <span class="fam-sep-line"></span>
-      <span class="fam-sep-dot">✦  ·  ✦</span>
-      <span class="fam-sep-line"></span>
-    </div>
-
-    <p class="fam-group-title">✦ Dama de Honor ✦</p>
-
-    <div class="fam-node">
-      <div class="fam-medal"><div class="fam-medal-orbit"></div><span class="fam-medal-icon">❋</span></div>
-      <p class="fam-role">Dama de Honor</p>
-      <p class="fam-names">Ana Torres Martínez</p>
-    </div>
   </div>
+
+  <div class="padr-carousel">
+    <div class="padr-track" id="padrTrack">
+      <article class="padr-slide">
+        <div class="padr-slide-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14 30 V18 A4 4 0 0118 14 H30 A4 4 0 0134 18 V30"/><path d="M14 30 L24 38 L34 30"/><circle cx="24" cy="22" r="2.5" fill="currentColor"/></svg></div>
+        <p class="padr-slide-role">Padrinos de Velación</p>
+        <p class="padr-slide-name">Mario Alberto González Borbolla<br>&amp; Lorena Torres Martínez</p>
+      </article>
+      <article class="padr-slide">
+        <div class="padr-slide-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="18" cy="26" r="8"/><circle cx="30" cy="26" r="8"/></svg></div>
+        <p class="padr-slide-role">Padrino de Anillos</p>
+        <p class="padr-slide-name">José Luis Torres Zaragoza</p>
+      </article>
+      <article class="padr-slide">
+        <div class="padr-slide-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 18 L24 30 L38 18 L24 14 Z"/><circle cx="14" cy="34" r="3"/><circle cx="34" cy="34" r="3"/></svg></div>
+        <p class="padr-slide-role">Padrinos de Arras</p>
+        <p class="padr-slide-name">Santiago Torres Rodríguez<br>&amp; Ylva Gotberg</p>
+      </article>
+      <article class="padr-slide">
+        <div class="padr-slide-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 18 Q24 6 40 18 Q24 30 8 18 Z"/><path d="M14 24 Q24 18 34 24"/><path d="M18 32 Q24 26 30 32"/></svg></div>
+        <p class="padr-slide-role">Padrinos de Lazo</p>
+        <p class="padr-slide-name">Xóchitl Janette Villa Vázquez<br>&amp; Víctor Hugo Bolaños Abraham</p>
+      </article>
+      <article class="padr-slide">
+        <div class="padr-slide-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="12" y="10" width="24" height="32" rx="2"/><line x1="16" y1="18" x2="32" y2="18"/><line x1="16" y1="24" x2="32" y2="24"/><line x1="16" y1="30" x2="28" y2="30"/></svg></div>
+        <p class="padr-slide-role">Madrina de Biblia y Rosario</p>
+        <p class="padr-slide-name">Miriam Villa Vázquez</p>
+      </article>
+      <article class="padr-slide">
+        <div class="padr-slide-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 8 V32" stroke-linecap="round"/><path d="M20 10 Q24 6 28 10" stroke-linecap="round"/><ellipse cx="24" cy="38" rx="6" ry="3"/></svg></div>
+        <p class="padr-slide-role">Madrina del Cirio</p>
+        <p class="padr-slide-name">Victoria Villa Vázquez</p>
+      </article>
+      <article class="padr-slide">
+        <div class="padr-slide-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="16" r="6"/><path d="M16 32 Q24 20 32 32" stroke-linecap="round"/><path d="M20 38 L24 30 L28 38" stroke-linecap="round"/></svg></div>
+        <p class="padr-slide-role">Madrina de Ramo</p>
+        <p class="padr-slide-name">Ana Torres Martínez</p>
+      </article>
+      <article class="padr-slide">
+        <div class="padr-slide-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 14 L16 26 Q16 32 24 32 Q32 32 32 26 L32 14"/><path d="M14 14 L34 14"/><line x1="24" y1="32" x2="24" y2="40"/><line x1="18" y1="40" x2="30" y2="40"/></svg></div>
+        <p class="padr-slide-role">Padrinos de Brindis</p>
+        <p class="padr-slide-name">Alberto Torres Rodríguez<br>&amp; Christian Chávez López</p>
+      </article>
+      <article class="padr-slide" style="background:linear-gradient(180deg, rgba(161,122,22,.10), rgba(255,255,255,.55))">
+        <div class="padr-slide-icon" style="color:var(--olive-accent)"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 36 Q12 28 12 20 Q12 14 18 14 Q22 14 24 18 Q26 14 30 14 Q36 14 36 20 Q36 28 24 36 Z"/></svg></div>
+        <p class="padr-slide-role" style="color:var(--olive-accent)">Dama de Honor</p>
+        <p class="padr-slide-name">Ana Torres Martínez</p>
+      </article>
+    </div>
+    <div class="padr-bullets" id="padrBullets" aria-hidden="true"></div>
+    <p class="padr-hint">← Desliza para ver más →</p>
+  </div>
+
 </section>
 
 
@@ -2491,6 +2706,20 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
     </div>
   </form>
 
+</section>
+
+
+<!-- ═══════════════ 12B. FOTOS FINALES ═══════════════ -->
+<section id="fotos-final">
+  <span class="lbl" style="color:var(--gold)">Nuestros recuerdos</span>
+  <h2 class="ttl">Momentos <em style="font-family:'Great Vibes',cursive;color:var(--olive-accent);font-size:42px;font-weight:400;font-style:normal">juntos</em></h2>
+  <div class="gline"></div>
+  <p class="ff-sub">Cada instante nos trajo hasta aquí.</p>
+  <div class="ff-grid">
+    <div class="ff-card"><img src="assets/fotos/f1.jpg" alt="Alejandra y Francisco" loading="lazy"></div>
+    <div class="ff-card"><img src="assets/fotos/f2.jpg" alt="Alejandra y Francisco" loading="lazy"></div>
+    <div class="ff-card"><img src="assets/fotos/f3.jpg" alt="Alejandra y Francisco" loading="lazy"></div>
+  </div>
 </section>
 
 
@@ -2678,11 +2907,7 @@ function heroAnim() {
     .to('#hDate',  { opacity: 1, duration: .7, ease: 'power2.out' }, 2.75)
     .to('#hScroll',{ opacity: 1, duration: .5, ease: 'power2.out' }, 3.1);
 
-  // Hero parallax
-  gsap.to('#heroBg', {
-    yPercent: 22, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
+  // Hero parallax — eliminado (sin foto de fondo)
 }
 
 /* ── PARTÍCULAS CON FÍSICA — CAEN · REBOTAN BAJO · SE DESVANECEN ── */
@@ -3099,6 +3324,40 @@ function submitRSVP(e) {
       toast(att.value === 'yes' ? '¡Gracias por confirmar! 💕' : 'Confirmación recibida 💌');
     });
 }
+
+/* ── PADRINOS CARRUSEL — bullets sincronizados ──────── */
+(function(){
+  const track = document.getElementById('padrTrack');
+  const bullets = document.getElementById('padrBullets');
+  if (!track || !bullets) return;
+  const slides = track.querySelectorAll('.padr-slide');
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.className = 'padr-bullet' + (i === 0 ? ' active' : '');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Ir al padrino ' + (i + 1));
+    b.addEventListener('click', () => {
+      slides[i].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    });
+    bullets.appendChild(b);
+  });
+  const dots = bullets.querySelectorAll('.padr-bullet');
+  let raf;
+  track.addEventListener('scroll', () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let bestIdx = 0, bestDist = Infinity;
+      slides.forEach((s, i) => {
+        const r = s.getBoundingClientRect();
+        const d = Math.abs((r.left + r.width / 2) - center);
+        if (d < bestDist) { bestDist = d; bestIdx = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === bestIdx));
+    });
+  }, { passive: true });
+})();
 
 /* ── SOBRE INTERACTIVO ───────────────────────────────── */
 document.querySelectorAll('.gift-envelope').forEach(function(env){
