@@ -260,6 +260,19 @@ section{padding:64px 22px}
   transition:all .3s var(--spring);
 }
 .btn-olive:active{background:var(--olive-lt);transform:scale(.96)}
+/* Variante dorada — para dar variedad en botones sólidos */
+.btn-gold{
+  background:var(--gold);color:var(--ink);border-color:var(--gold);
+  box-shadow:0 4px 22px rgba(161,122,22,.3);
+  transition:all .3s var(--spring);
+}
+.btn-gold:active{background:#8a6812;transform:scale(.96)}
+/* Variante outline rosa polvo */
+.btn-rose{
+  color:var(--olive-accent);border-color:var(--olive-accent);
+  background:transparent;
+}
+.btn-rose:active{background:rgba(173,113,113,.1);transform:scale(.96)}
 
 /* ── HERO ─────────────────────────────────────────────── */
 #hero{
@@ -569,7 +582,7 @@ section{padding:64px 22px}
 /* ── Etiqueta de tipo ─────────────────────────────────── */
 .loc-type{
   font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:700;
-  color:var(--olive);margin-bottom:14px;
+  color:var(--gold);margin-bottom:14px;
   display:inline-block;
 }
 
@@ -602,11 +615,17 @@ section{padding:64px 22px}
 .loc-med-block .loc-medallion::after{inset:6px}
 .loc-med-tag{
   font-size:13px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--olive);font-weight:700;text-align:center;
+  color:var(--gold);font-weight:700;text-align:center;
   font-family:'Lato',sans-serif;
 }
+/* segunda card (Recepción) — acento rosa polvo */
+.loc-card:nth-of-type(2) .loc-med-tag{color:var(--olive-accent)}
+.loc-card:nth-of-type(2) .loc-type{color:var(--olive-accent)}
+.loc-card:nth-of-type(2) .loc-med-arc{stroke:var(--olive-accent)}
+.loc-card:nth-of-type(2) .loc-rotor .loc-dot{background:var(--olive-accent)}
+.loc-card:nth-of-type(2) .btn{color:var(--olive-accent);border-color:var(--olive-accent)}
 .loc-med-block .loc-med-time{font-size:34px;font-weight:500}
-.loc-med-block .loc-med-ampm{font-size:13px;letter-spacing:3px;font-weight:600}
+.loc-med-block .loc-med-ampm{font-size:13px;letter-spacing:3px;font-weight:600;color:var(--gold)}
 /* Anillo exterior punteado — rotación lenta */
 .loc-medallion::before{
   content:'';position:absolute;inset:-22px;
@@ -801,10 +820,13 @@ section{padding:64px 22px}
 }
 .tl-t{
   font-family:'Cormorant Garamond',serif;
-  font-size:15px;color:var(--olive);font-weight:700;
+  font-size:15px;color:var(--gold);font-weight:700;
   letter-spacing:2.5px;text-transform:uppercase;
   line-height:1.1;
 }
+/* Alternancia sutil por fila — hora en dorado default, cada 3ra en rosa */
+.tl-row:nth-of-type(3n) .tl-t{color:var(--olive-accent)}
+.tl-row:nth-of-type(4n+1) .tl-t{color:var(--gold)}
 .tl-ev{
   font-family:'Cormorant Garamond',serif;
   font-size:22px;color:var(--cream);
@@ -850,6 +872,15 @@ section{padding:64px 22px}
     0 0 12px rgba(173,113,113,.55),
     0 0 24px rgba(173,113,113,.3);
 }
+/* Alternar color de los dots del itinerario */
+.tl-row:nth-of-type(2).on .tl-dot,
+.tl-row:nth-of-type(5).on .tl-dot{background:var(--gold);box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 12px rgba(161,122,22,.6),0 0 24px rgba(161,122,22,.35)}
+.tl-row:nth-of-type(3).on .tl-dot,
+.tl-row:nth-of-type(6).on .tl-dot{background:var(--olive-accent);box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 12px rgba(173,113,113,.55),0 0 24px rgba(173,113,113,.3)}
+.tl-row:nth-of-type(2).on .tl-pulse,
+.tl-row:nth-of-type(5).on .tl-pulse{border-color:var(--gold)}
+.tl-row:nth-of-type(3).on .tl-pulse,
+.tl-row:nth-of-type(6).on .tl-pulse{border-color:var(--olive-accent)}
 
 /* Orbital decorativo alrededor del dot */
 .tl-orn{
@@ -1053,8 +1084,13 @@ section{padding:64px 22px}
 /* Rol */
 .fam-role{
   font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
-  color:var(--olive);margin-top:6px;
+  color:var(--gold);margin-top:6px;
 }
+/* Padres de la Novia — rosa polvo para contraste con Padres del Novio en dorado */
+.fam-node:nth-of-type(3) .fam-role{color:var(--olive-accent)}
+/* Ícono del medallón — alternar color */
+.fam-node:nth-of-type(2) .fam-medal-icon{color:var(--gold)}
+.fam-node:nth-of-type(3) .fam-medal-icon{color:var(--olive-accent)}
 
 /* Nombres */
 .fam-names{
@@ -1066,7 +1102,7 @@ section{padding:64px 22px}
 }
 .fam-amp{
   display:block;font-family:'Great Vibes',cursive;
-  font-size:22px;color:var(--olive);
+  font-size:26px;color:var(--gold);
   line-height:.8;margin:2px 0 4px;
 }
 
@@ -1210,10 +1246,10 @@ section{padding:64px 22px}
   padding:22px 18px;border:1px solid rgba(71,2,2,.22);border-radius:14px;
   background:linear-gradient(180deg, rgba(235,224,169,.18), rgba(255,255,255,.0));
 }
-.rsvp-greet-lbl{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--olive);margin-bottom:10px;font-weight:700}
+.rsvp-greet-lbl{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:700}
 .rsvp-greet-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--cream);line-height:1.25;margin-bottom:10px}
-.rsvp-greet-pases{font-size:16px;letter-spacing:1.5px;text-transform:uppercase;color:var(--olive);font-weight:700}
-.rsvp-greet-pases #rsvpPases{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--olive);letter-spacing:0;margin-right:6px}
+.rsvp-greet-pases{font-size:16px;letter-spacing:1.5px;text-transform:uppercase;color:var(--olive-accent);font-weight:700}
+.rsvp-greet-pases #rsvpPases{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--gold);letter-spacing:0;margin-right:6px}
 .rsvp-greet.confirmed{background:linear-gradient(180deg, rgba(71,2,2,.16), rgba(255,255,255,0));border-color:var(--olive)}
 
 /* Mensaje "Solo adultos" al pie del RSVP */
@@ -1236,7 +1272,7 @@ section{padding:64px 22px}
   max-width:340px;margin:0 auto;
 }
 .fg{margin-bottom:22px}
-.flbl{display:block;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--olive);margin-bottom:10px;font-weight:700;text-align:center}
+.flbl{display:block;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:700;text-align:center}
 .finput{
   width:100%;background:var(--ink2);border:1px solid rgba(173,113,113,.2);
   border-radius:7px;padding:15px 18px;color:var(--cream);
@@ -1251,11 +1287,14 @@ section{padding:64px 22px}
 .ropt input[type=radio]{position:absolute;opacity:0;width:0;height:0}
 .rlbl{
   display:flex;align-items:center;justify-content:center;gap:8px;
-  padding:15px 10px;border:1px solid rgba(173,113,113,.2);border-radius:7px;
+  padding:15px 10px;border:1px solid rgba(161,122,22,.28);border-radius:7px;
   cursor:pointer;font-size:15px;letter-spacing:1px;color:var(--cream);opacity:.78;font-weight:600;
   transition:all .3s var(--spring);user-select:none;
 }
-.ropt input:checked+.rlbl{border-color:var(--olive);background:rgba(173,113,113,.1);opacity:1;color:var(--olive)}
+.ropt input:checked+.rlbl{border-color:var(--gold);background:rgba(161,122,22,.12);opacity:1;color:var(--gold)}
+/* Segunda opción (No podré) — acento rosa polvo */
+.ropt:last-child .rlbl{border-color:rgba(173,113,113,.28)}
+.ropt:last-child input:checked+.rlbl{border-color:var(--olive-accent);background:rgba(173,113,113,.12);color:var(--olive-accent)}
 .gctr{display:flex;align-items:center;background:var(--ink2);border:1px solid rgba(173,113,113,.2);border-radius:7px;overflow:hidden}
 .gc-btn{width:54px;height:52px;background:transparent;border:none;color:var(--olive);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s var(--spring)}
 .gc-btn:active{background:rgba(173,113,113,.1);transform:scale(.82)}
@@ -1353,10 +1392,12 @@ section{padding:64px 22px}
   box-shadow:
     0 4px 18px rgba(0,0,0,.45),
     0 12px 40px rgba(0,0,0,.35),
-    0 0 0 1px rgba(173,113,113,.3);
+    0 0 0 2px var(--gold),
+    0 0 0 4px rgba(255,255,255,.6),
+    0 0 0 5px var(--olive-accent);
 }
 .alb-qr{width:260px;height:260px;display:block;border-radius:4px}
-.alb-scan{margin-top:16px;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--olive);opacity:.85}
+.alb-scan{margin-top:16px;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--gold);opacity:1}
 .alb-btn{max-width:310px;margin:0 auto;display:flex}
 .alb-hint{text-align:center;font-size:14px;color:var(--cream);opacity:.7;line-height:1.55;font-weight:500;margin-top:22px}
 
@@ -1720,20 +1761,28 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
     0 3px 16px rgba(173,113,113,.3);
 }
 /* Tamaños sucesivos del número */
-.cd-ring-grid > :nth-child(1) .cd-num{font-size:86px;letter-spacing:-2px}
-.cd-ring-grid > :nth-child(2) .cd-num{font-size:68px;letter-spacing:-1.6px}
-.cd-ring-grid > :nth-child(3) .cd-num{font-size:54px;letter-spacing:-1.2px}
-.cd-ring-grid > :nth-child(4) .cd-num{font-size:44px;letter-spacing:-1px}
+.cd-ring-grid > :nth-child(1) .cd-num{font-size:86px;letter-spacing:-2px;color:var(--olive)}
+.cd-ring-grid > :nth-child(2) .cd-num{font-size:68px;letter-spacing:-1.6px;color:var(--gold)}
+.cd-ring-grid > :nth-child(3) .cd-num{font-size:54px;letter-spacing:-1.2px;color:var(--olive-accent)}
+.cd-ring-grid > :nth-child(4) .cd-num{font-size:44px;letter-spacing:-1px;color:var(--gold)}
 
 .cd-ring-lbl{
   letter-spacing:3px;text-transform:uppercase;
   color:var(--olive);opacity:1;font-weight:700;
 }
-/* Tamaños sucesivos de la etiqueta */
-.cd-ring-grid > :nth-child(1) .cd-ring-lbl{font-size:14px;margin-top:16px}
-.cd-ring-grid > :nth-child(2) .cd-ring-lbl{font-size:13px;margin-top:13px;letter-spacing:3px}
-.cd-ring-grid > :nth-child(3) .cd-ring-lbl{font-size:12px;margin-top:10px;letter-spacing:2.5px}
-.cd-ring-grid > :nth-child(4) .cd-ring-lbl{font-size:11px;margin-top:8px;letter-spacing:2.5px}
+/* Tamaños + alternancia de colores por celda */
+.cd-ring-grid > :nth-child(1) .cd-ring-lbl{font-size:14px;margin-top:16px;color:var(--olive)}
+.cd-ring-grid > :nth-child(2) .cd-ring-lbl{font-size:13px;margin-top:13px;letter-spacing:3px;color:var(--gold)}
+.cd-ring-grid > :nth-child(3) .cd-ring-lbl{font-size:12px;margin-top:10px;letter-spacing:2.5px;color:var(--olive-accent)}
+.cd-ring-grid > :nth-child(4) .cd-ring-lbl{font-size:11px;margin-top:8px;letter-spacing:2.5px;color:var(--gold)}
+/* Rotores orbitantes tomando distinto color por celda */
+.cd-ring-grid > :nth-child(2) .cd-dot{background:var(--gold)}
+.cd-ring-grid > :nth-child(3) .cd-dot{background:var(--olive-accent)}
+.cd-ring-grid > :nth-child(4) .cd-dot{background:var(--gold)}
+/* Anillo de progreso — colores alternados */
+.cd-ring-grid > :nth-child(2) .cd-ring-prog{stroke:var(--gold)}
+.cd-ring-grid > :nth-child(3) .cd-ring-prog{stroke:var(--olive-accent)}
+.cd-ring-grid > :nth-child(4) .cd-ring-prog{stroke:var(--gold)}
 
 @media(prefers-reduced-motion:reduce){
   .cd-wave-top svg,.cd-wave-bot svg,.cd-rotor,
@@ -1854,6 +1903,11 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 .padrino-slide{flex:0 0 100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;padding:14px 34px}
 .padrino-icon{width:66px;height:66px;margin-bottom:18px}
 .padrino-icon svg{width:100%;height:100%;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+/* Alternar colores por slide — dorado / rosa / vino */
+.padrino-slide:nth-child(3n+2) .padrino-icon svg{stroke:var(--olive-accent)}
+.padrino-slide:nth-child(3n+2) .padrino-rol{color:var(--olive-accent)}
+.padrino-slide:nth-child(3n) .padrino-icon svg{stroke:var(--olive)}
+.padrino-slide:nth-child(3n) .padrino-rol{color:var(--olive)}
 .padrino-rol{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
 .padrino-names{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;line-height:1.6;color:var(--cream)}
 .padrinos-arrow{position:absolute;top:40px;transform:translateY(-50%);width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--gold);z-index:2;padding:0}
@@ -2366,7 +2420,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 
   <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Alejandra+%26+Francisco&dates=20261128T174500/20261129T030000&details=Ceremonia+Religiosa+5:45+PM+en+Templo+de+Santa+Rosa+de+Lima+y+Recepci%C3%B3n+8:00+PM+en+Hacienda+Tanganxoan.&location=Templo+de+Santa+Rosa+de+Lima%2C+Morelia%2C+Michoacan"
      target="_blank" rel="noopener" id="calBtn"
-     class="btn btn-olive" style="max-width:310px;margin:0 auto;display:flex;opacity:1">
+     class="btn btn-gold" style="max-width:310px;margin:0 auto;display:flex;opacity:1">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     Agregar a Google Calendar
   </a>
@@ -2382,11 +2436,12 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
     <svg class="tl-svg" id="tlSvg" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id="tlGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="#ad7171" stop-opacity=".55"/>
-          <stop offset="30%" stop-color="#470202" stop-opacity="1"/>
-          <stop offset="55%" stop-color="#d6d3ba" stop-opacity="1"/>
-          <stop offset="80%" stop-color="#470202" stop-opacity="1"/>
-          <stop offset="100%" stop-color="#ad7171" stop-opacity=".55"/>
+          <stop offset="0%"   stop-color="#470202" stop-opacity=".55"/>
+          <stop offset="18%"  stop-color="#a17a16" stop-opacity="1"/>
+          <stop offset="40%"  stop-color="#ad7171" stop-opacity="1"/>
+          <stop offset="60%"  stop-color="#a17a16" stop-opacity="1"/>
+          <stop offset="82%"  stop-color="#470202" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#a17a16" stop-opacity=".55"/>
         </linearGradient>
         <filter id="tlGlow" x="-30%" y="-30%" width="160%" height="160%">
           <feGaussianBlur stdDeviation="2.5" result="b1"/>
@@ -2486,13 +2541,13 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 
   <div class="alb-qr-wrap">
     <div class="alb-qr-frame">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&color=470202&bgcolor=FAF6E7&data=https%3A%2F%2Fphotos.app.goo.gl%2Fboda-alejandra-y-paco"
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&color=5A2818&bgcolor=FAF6E7&data=https%3A%2F%2Fphotos.app.goo.gl%2Fboda-alejandra-y-paco"
            alt="QR álbum compartido Alejandra y Francisco" class="alb-qr" loading="lazy">
     </div>
     <p class="alb-scan">Escanea con la cámara</p>
   </div>
 
-  <a href="https://photos.app.goo.gl/boda-alejandra-y-paco" target="_blank" rel="noopener" class="btn alb-btn">
+  <a href="https://photos.app.goo.gl/boda-alejandra-y-paco" target="_blank" rel="noopener" class="btn btn-rose alb-btn">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
     Abrir álbum
   </a>
