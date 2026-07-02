@@ -29,20 +29,22 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Italianno&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Great+Vibes&family=Italianno&family=Lato:wght@400;500;700&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
   <style>
 /* ── TOKENS ───────────────────────────────────────────── */
 :root {
-  --olive:        #470202;             /* burgundy profundo (texto/acento fuerte) */
+  --olive:        #470202;             /* vino profundo (acento fuerte, uso reducido) */
   --olive-lt:     #d6d3ba;             /* highlight claro (crema cálido) */
-  --olive-accent: #ad7171;             /* rosa polvo medio (swatches) */
+  --olive-accent: #ad7171;             /* rosa polvo medio (uso amplio) */
   --olive-dim:    rgba(71,2,2,.14);
-  --cream:        #470202;             /* burgundy oscuro — texto principal */
+  --cream:        #3a1c0f;             /* marrón cálido rico — texto principal (menos vino) */
   --ink:          #FFFFFF;             /* blanco puro — bg principal */
   --ink2:         #FAF6E7;             /* cream cálido — bg secundario */
   --ink3:         #d6d3ba;             /* beige cálido — bg terciario */
-  --gold:         #a17a16;             /* dorado para acentos */
+  --gold:         #a17a16;             /* dorado para acentos (uso amplio) */
+  --gold-dark:    #8a6812;             /* dorado oscuro (contraste texto) */
   --taupe:        #D4C5B2;             /* taupe para acentos */
+  --terra:        #a04b32;             /* terracota cálido (nuevo acento) */
   --spring:       cubic-bezier(.34,1.56,.64,1);
   --smooth:       cubic-bezier(.25,.46,.45,.94);
 }
@@ -209,18 +211,18 @@ section{padding:64px 22px}
   position:fixed;bottom:22px;right:22px;width:46px;height:46px;
   border-radius:50%;background:rgba(255,255,255,.85);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(125,138,86,.4);color:var(--olive);font-size:18px;
+  border:1px solid var(--gold);color:var(--gold);font-size:18px;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;z-index:999;
   box-shadow:0 4px 24px rgba(0,0,0,.45);
   transition:all .3s var(--spring);
 }
 .music-btn:active{transform:scale(.88)}
-.music-btn.on{border-color:var(--olive);background:rgba(173,113,113,.14);
+.music-btn.on{border-color:var(--gold);background:rgba(161,122,22,.14);
   animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(173,113,113,.35),0 4px 24px rgba(0,0,0,.45)}
-  50%{box-shadow:0 0 0 9px rgba(173,113,113,0),0 4px 24px rgba(0,0,0,.45)}
+  0%,100%{box-shadow:0 0 0 0 rgba(161,122,22,.35),0 4px 24px rgba(0,0,0,.45)}
+  50%{box-shadow:0 0 0 9px rgba(161,122,22,0),0 4px 24px rgba(0,0,0,.45)}
 }
 
 /* ── TOAST ────────────────────────────────────────────── */
@@ -240,13 +242,14 @@ section{padding:64px 22px}
 /* ── HELPERS ──────────────────────────────────────────── */
 .lbl{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);text-align:center;display:block;font-weight:700}
 .ttl{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500;text-align:center;color:var(--cream);line-height:1.25;margin-top:6px}
-.gline{width:50px;height:1px;background:linear-gradient(to right,transparent,var(--olive),transparent);margin:18px auto}
+.gline{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:18px auto;position:relative}
+.gline::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:6px;height:3px;border-radius:50%;background:var(--olive-accent)}
 
 .btn{
   display:flex;align-items:center;justify-content:center;gap:9px;
   width:100%;padding:15px 16px;
-  border:1px solid var(--olive);border-radius:7px;
-  background:transparent;color:var(--olive);
+  border:1px solid var(--gold);border-radius:7px;
+  background:transparent;color:var(--gold);
   font-family:'Lato',sans-serif;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;
   text-decoration:none;cursor:pointer;-webkit-appearance:none;
   position:relative;overflow:hidden;
@@ -274,164 +277,167 @@ section{padding:64px 22px}
 }
 .btn-rose:active{background:rgba(173,113,113,.1);transform:scale(.96)}
 
-/* ── HERO ─────────────────────────────────────────────── */
+/* ── HERO ─── REDISEÑO EDITORIAL SIN CAJA ──────────────── */
 #hero{
   min-height:100svh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  position:relative;overflow:hidden;padding:48px 28px 88px;
+  position:relative;overflow:hidden;padding:56px 30px 100px;
 }
 
-/* Fondo plano del hero (sin foto) — capas suaves crema/dorado */
+/* Fondo — capas ricas: crema base + halos dorados/rosados + textura */
 .h-bg-plain{
   position:absolute;inset:0;z-index:0;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(161,122,22,.10) 0%, transparent 55%),
-    radial-gradient(ellipse at 75% 75%, rgba(173,113,113,.10) 0%, transparent 55%),
-    linear-gradient(180deg, #faf3e3 0%, #f5ead0 60%, #ecd9bb 100%);
+    radial-gradient(circle 60% at 50% 15%, rgba(255,246,220,.9) 0%, transparent 55%),
+    radial-gradient(circle 50% at 20% 78%, rgba(173,113,113,.14) 0%, transparent 60%),
+    radial-gradient(circle 50% at 82% 82%, rgba(161,122,22,.16) 0%, transparent 60%),
+    radial-gradient(circle 70% at 50% 55%, rgba(255,250,232,.55) 0%, transparent 65%),
+    linear-gradient(180deg, #f9eecf 0%, #f2e0b4 45%, #ebd3a1 100%);
+}
+.h-bg-plain::before{
+  content:'';position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(115deg,
+      transparent 0px, transparent 90px,
+      rgba(161,122,22,.045) 90px, rgba(161,122,22,.045) 91px),
+    repeating-linear-gradient(65deg,
+      transparent 0px, transparent 130px,
+      rgba(173,113,113,.05) 130px, rgba(173,113,113,.05) 131px);
+  opacity:.65;pointer-events:none;
 }
 .h-bg-plain::after{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 48%, rgba(255,250,232,.55) 0%, transparent 60%);
+  background:radial-gradient(circle at 50% 42%, rgba(255,251,232,.55) 0%, transparent 55%);
   pointer-events:none;
 }
 
-/* Decorative border frame */
+/* Arcos decorativos SVG dorados en top y bottom */
+.h-arch{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:calc(100% - 36px);max-width:400px;
+  height:80px;pointer-events:none;z-index:2;
+  opacity:.55;
+}
+.h-arch-top{top:34px}
+.h-arch-bot{bottom:50px;transform:translateX(-50%) scaleY(-1)}
+.h-arch svg{width:100%;height:100%;display:block}
+.h-arch path{fill:none;stroke:var(--gold);stroke-width:1;stroke-linecap:round}
+.h-arch .h-arch-2{stroke:var(--olive-accent);stroke-opacity:.7}
+.h-arch .h-arch-dot{fill:var(--gold);stroke:none}
+
+/* Frame — sin marco duro, solo esquinas ornamentales dorado */
 .h-frame{
-  position:absolute;top:20px;left:20px;right:20px;bottom:20px;
-  border:1px solid rgba(173,113,113,.24);z-index:2;pointer-events:none;
+  position:absolute;top:28px;left:28px;right:28px;bottom:28px;
+  z-index:2;pointer-events:none;
 }
 .h-frame::before,.h-frame::after{
-  content:'✦';position:absolute;color:var(--olive);font-size:11px;
-  opacity:.6;line-height:1;
-  background:var(--ink2);padding:0 8px;
+  content:'';position:absolute;width:32px;height:32px;
+  border-color:var(--gold);
 }
-.h-frame::before{top:-6px;left:50%;transform:translateX(-50%)}
-.h-frame::after{bottom:-6px;left:50%;transform:translateX(-50%)}
+.h-frame::before{
+  top:0;left:0;border-top:1px solid;border-left:1px solid;
+}
+.h-frame::after{
+  bottom:0;right:0;border-bottom:1px solid;border-right:1px solid;
+}
+.h-frame-tr,.h-frame-bl{
+  position:absolute;width:32px;height:32px;pointer-events:none;
+  border-color:var(--olive-accent);
+}
+.h-frame-tr{top:28px;right:28px;border-top:1px solid;border-right:1px solid;z-index:2}
+.h-frame-bl{bottom:28px;left:28px;border-bottom:1px solid;border-left:1px solid;z-index:2}
 
-/* Anillos decorativos concéntricos detrás del texto */
+/* Anillos decorativos (mantengo pero más sutiles) */
 .h-rings{
   position:absolute;left:50%;top:50%;
-  width:340px;height:340px;
+  width:360px;height:360px;
   transform:translate(-50%,-50%);
   z-index:2;pointer-events:none;
 }
-.h-ring{
-  position:absolute;inset:0;
-  border-radius:50%;
-  border:1px solid rgba(173,113,113,.14);
-}
-.h-ring-1{inset:0;animation:hRingBreathe 7s ease-in-out infinite}
-.h-ring-2{inset:-36px;border-style:dashed;border-color:rgba(173,113,113,.11);animation:hRingRotate 60s linear infinite}
-.h-ring-3{inset:-78px;border-color:rgba(173,113,113,.07);animation:hRingBreathe 9s ease-in-out infinite reverse}
+.h-ring{position:absolute;inset:0;border-radius:50%}
+.h-ring-1{border:1px solid rgba(161,122,22,.16);animation:hRingBreathe 7s ease-in-out infinite}
+.h-ring-2{inset:-36px;border:1px dashed rgba(173,113,113,.13);animation:hRingRotate 60s linear infinite}
+.h-ring-3{inset:-78px;border:1px solid rgba(161,122,22,.08);animation:hRingBreathe 9s ease-in-out infinite reverse}
 @keyframes hRingBreathe{
   0%,100%{transform:scale(1);opacity:.7}
   50%{transform:scale(1.025);opacity:1}
 }
 @keyframes hRingRotate{to{transform:rotate(360deg)}}
 
-/* Ondas de viento en el hero */
-.h-wave{
-  position:absolute;left:0;right:0;height:48px;
-  pointer-events:none;overflow:hidden;z-index:2;
-}
-.h-wave-top{top:64px}
-.h-wave-bot{bottom:78px;transform:scaleY(-1)}
-.h-wave svg{
-  width:220%;height:100%;display:block;
-  animation:hWaveSlide 30s linear infinite;
-  will-change:transform;
-}
-.h-wave-bot svg{animation-duration:38s;animation-direction:reverse}
-@keyframes hWaveSlide{
-  from{transform:translateX(0)}
-  to  {transform:translateX(-50%)}
-}
+/* Ondas de viento — desactivadas en el nuevo hero */
+.h-wave{display:none}
 
 /* Particles */
 .h-particles{position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none}
 .meteor{position:absolute;top:0;left:0;will-change:transform,opacity}
 
-/* Content */
+/* Content wrapper — márgenes generosos */
 .h-cnt{
   position:relative;z-index:4;text-align:center;
   display:flex;flex-direction:column;align-items:center;
+  padding:0 8px;
 }
-.h-we{
-  font-size:13px;letter-spacing:6px;text-transform:uppercase;font-weight:600;
-  color:var(--olive);
-  text-shadow:0 1px 8px rgba(255,255,255,.9);
-}
-.h-div{display:flex;align-items:center;gap:14px;margin:20px 0 14px;width:100%;justify-content:center}
-.h-div::before,.h-div::after{content:'';flex:1;max-width:70px;height:1px;background:linear-gradient(to right,transparent,var(--olive))}
-.h-div::after{background:linear-gradient(to left,transparent,var(--olive))}
-.h-div-dot{font-size:10px;color:var(--olive);letter-spacing:6px}
 
-/* ── NOMBRES DE LOS NOVIOS — CINZEL + GOTA EN CHARCO ──── */
+/* ── EYEBROW · "Nos casamos" ─── Cormorant italic ─────── */
+.h-we{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:400;
+  font-size:15px;letter-spacing:8px;text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:6px;
+}
+
+/* Separador estrella dorado */
+.h-div{display:flex;align-items:center;gap:12px;margin:12px 0 24px;width:100%;justify-content:center;max-width:220px}
+.h-div::before,.h-div::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold));
+}
+.h-div::after{background:linear-gradient(to left,transparent,var(--gold))}
+.h-div-dot{font-size:9px;color:var(--gold);letter-spacing:6px}
+
+/* ── NOMBRES · Playfair Display Light editorial ─────── */
 .h-name-wrap{
   display:flex;align-items:center;justify-content:center;
   gap:12px;width:100%;
   position:relative;
 }
-.h-clip{
-  overflow:visible;line-height:1;padding:10px 0;
-  flex:0 0 auto;position:relative;
-}
+.h-clip{overflow:visible;line-height:1.05;padding:6px 0;flex:0 0 auto;position:relative}
 .h-name{
-  font-family:'Cinzel',serif;
-  font-weight:500;
-  font-size:42px;
-  letter-spacing:4px;
+  font-family:'Playfair Display',serif;
+  font-weight:400;
+  font-size:48px;
+  letter-spacing:2px;
   text-transform:uppercase;
-  color:var(--olive);
+  color:#3a1a08;
   display:block;
-  text-shadow:
-    0 2px 22px rgba(255,255,255,1),
-    0 0 40px rgba(255,255,255,.85),
-    0 4px 28px rgba(71,2,2,.35),
-    0 1px 2px rgba(42,58,34,.3);
-  will-change:transform,opacity,filter;
-  transform-origin:center center;
   white-space:nowrap;
   position:relative;z-index:2;
+  text-shadow:0 1px 20px rgba(255,255,255,.7);
 }
-#hN2{font-size:30px;letter-spacing:3px}
+#hN2{font-size:36px;letter-spacing:1.5px}
 
-/* Ripple (onda de gota en charco) */
-.h-ripple{
-  position:absolute;
-  left:50%;top:55%;
-  width:180px;height:60px;
-  transform:translate(-50%,-50%) scale(0);
-  pointer-events:none;z-index:1;opacity:0;
-}
-.h-ripple::before,.h-ripple::after{
-  content:'';position:absolute;inset:0;
-  border-radius:50%;
-  border:1px solid rgba(125,138,86,.55);
-}
-.h-ripple::after{
-  inset:8px;border-color:rgba(125,138,86,.28);
-}
+/* Ripple oculto en el nuevo diseño */
+.h-ripple{display:none}
 
-.h-amp-clip{overflow:visible;line-height:1;margin:14px 0;position:relative}
+/* Ampersand editorial en Great Vibes dorado */
+.h-amp-clip{overflow:visible;line-height:1;margin:12px 0 14px;position:relative}
 .h-amp{
-  font-family:'Italianno',cursive;
-  font-size:84px;
-  color:var(--olive);
+  font-family:'Great Vibes',cursive;
+  font-size:96px;
+  color:var(--gold);
   display:block;
   line-height:.8;
   text-shadow:
-    0 2px 24px rgba(255,255,255,1),
-    0 0 40px rgba(173,113,113,.55),
-    0 2px 6px rgba(58,65,42,.25);
-  will-change:transform,opacity,filter;
+    0 2px 24px rgba(255,255,255,.65),
+    0 0 40px rgba(161,122,22,.35);
 }
 
-/* Líneas de viento laterales — delgadas */
+/* Líneas de viento laterales — dorado */
 .h-name-wind-line{
-  flex:0 1 56px;min-width:22px;
+  flex:0 1 68px;min-width:24px;
   height:1px;
-  background:linear-gradient(to right,transparent,rgba(173,113,113,.5),transparent);
+  background:linear-gradient(to right,transparent,rgba(161,122,22,.55),transparent);
   opacity:0;
   animation:hWindLinePulse 5.5s ease-in-out infinite;
 }
@@ -441,35 +447,47 @@ section{padding:64px 22px}
   50%{opacity:.9;transform:scaleX(1)}
 }
 
+/* ── FECHA · Sin caja, diseño editorial ─── */
 .h-date-wrap{
-  margin-top:40px;position:relative;
-  display:inline-flex;flex-direction:column;align-items:center;
-  padding:16px 28px 14px;
-  background:rgba(255,255,255,.55);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border:1px solid rgba(173,113,113,.35);
-  border-radius:2px;
-  box-shadow:0 4px 28px rgba(173,113,113,.18),0 0 0 3px rgba(255,255,255,.35);
+  margin-top:52px;position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  background:transparent;border:none;box-shadow:none;padding:0;
 }
-.h-date-wrap::before,.h-date-wrap::after{
-  content:'';position:absolute;left:50%;transform:translateX(-50%);
-  width:26px;height:1px;background:var(--olive);
+.h-date-wrap::before,.h-date-wrap::after{display:none}
+
+.h-date-day{
+  font-family:'Playfair Display',serif;
+  font-weight:300;font-size:64px;line-height:1;
+  color:var(--gold);
+  letter-spacing:2px;
+  margin-bottom:6px;
 }
-.h-date-wrap::before{top:-1px;box-shadow:0 -6px 0 -5px var(--olive)}
-.h-date-wrap::after{bottom:-1px}
 .h-date{
   font-family:'Cormorant Garamond',serif;
-  font-weight:700;
-  font-size:20px;letter-spacing:4px;text-transform:uppercase;
-  color:var(--olive);
-  text-shadow:0 1px 8px rgba(255,255,255,.9);
+  font-weight:500;
+  font-size:15px;letter-spacing:8px;text-transform:uppercase;
+  color:var(--olive-accent);
+  display:flex;align-items:center;gap:12px;
 }
+.h-date::before,.h-date::after{
+  content:'';width:24px;height:1px;background:var(--olive-accent);opacity:.6;
+}
+.h-city-wrap{
+  margin-top:22px;
+  display:flex;align-items:center;gap:14px;
+  max-width:280px;
+}
+.h-city-wrap::before,.h-city-wrap::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(71,2,2,.45));
+}
+.h-city-wrap::after{background:linear-gradient(to left,transparent,rgba(71,2,2,.45))}
 .h-city{
-  font-family:'Cormorant Garamond',serif;
-  font-size:15px;letter-spacing:4px;text-transform:uppercase;
-  font-weight:600;
-  color:var(--olive);opacity:1;margin-top:10px;
-  text-shadow:0 1px 6px rgba(255,255,255,.9);
+  font-family:'Cormorant Infant',serif;
+  font-size:14px;letter-spacing:5px;text-transform:uppercase;
+  font-weight:500;
+  color:var(--olive);opacity:.9;margin:0;
+  white-space:nowrap;
 }
 
 /* Scroll cue */
@@ -477,10 +495,10 @@ section{padding:64px 22px}
   position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:10px;z-index:3;
 }
-.h-scroll span{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--olive);opacity:.75;font-weight:600}
+.h-scroll span{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.85;font-weight:700}
 .h-scroll-line{
   width:1px;height:42px;
-  background:linear-gradient(to bottom,var(--olive),transparent);
+  background:linear-gradient(to bottom,var(--gold),transparent);
   transform-origin:top;
   animation:scrollLine 2s ease-in-out infinite;
 }
@@ -857,7 +875,7 @@ section{padding:64px 22px}
   width:14px;height:14px;margin-top:-7px;
   border-radius:50%;
   background:var(--ink);
-  border:1.5px solid var(--olive);
+  border:1.5px solid var(--gold);
   transform:scale(0);
   transition:transform .55s var(--spring), box-shadow .55s, background .55s;
   z-index:2;
@@ -866,21 +884,19 @@ section{padding:64px 22px}
 .tl-row[data-side="right"] .tl-dot{right:22px}
 .tl-row.on .tl-dot{
   transform:scale(1);
-  background:var(--olive);
+  background:var(--gold);
   box-shadow:
     0 0 0 3px rgba(255,255,255,.9),
-    0 0 12px rgba(173,113,113,.55),
-    0 0 24px rgba(173,113,113,.3);
+    0 0 12px rgba(161,122,22,.55),
+    0 0 24px rgba(161,122,22,.3);
 }
-/* Alternar color de los dots del itinerario */
-.tl-row:nth-of-type(2).on .tl-dot,
-.tl-row:nth-of-type(5).on .tl-dot{background:var(--gold);box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 12px rgba(161,122,22,.6),0 0 24px rgba(161,122,22,.35)}
+/* Alternar color de los dots — dorado default, rosa cada 3ra, vino solo ocasional */
 .tl-row:nth-of-type(3).on .tl-dot,
 .tl-row:nth-of-type(6).on .tl-dot{background:var(--olive-accent);box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 12px rgba(173,113,113,.55),0 0 24px rgba(173,113,113,.3)}
-.tl-row:nth-of-type(2).on .tl-pulse,
-.tl-row:nth-of-type(5).on .tl-pulse{border-color:var(--gold)}
+.tl-row:nth-of-type(4).on .tl-dot{background:var(--olive);box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 12px rgba(71,2,2,.5),0 0 24px rgba(71,2,2,.28)}
 .tl-row:nth-of-type(3).on .tl-pulse,
 .tl-row:nth-of-type(6).on .tl-pulse{border-color:var(--olive-accent)}
+.tl-row:nth-of-type(4).on .tl-pulse{border-color:var(--olive)}
 
 /* Orbital decorativo alrededor del dot */
 .tl-orn{
@@ -940,7 +956,7 @@ section{padding:64px 22px}
   padding:18px 18px;border-radius:0 8px 8px 0;
   font-size:15px;color:var(--cream);opacity:.85;line-height:1.65;font-weight:500;
 }
-.dc-note strong{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--olive);font-weight:700;display:block;margin-bottom:6px}
+.dc-note strong{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold);font-weight:700;display:block;margin-bottom:6px}
 
 /* ── FAMILY · CONSTELACIÓN DE MEDALLONES ─────────────── */
 /* #family — "jardín en niebla" — bokeh orgánico de orbes dispersos en toda la sección */
@@ -1119,7 +1135,7 @@ section{padding:64px 22px}
   width:48px;height:1px;
   background:linear-gradient(to right,transparent,rgba(173,113,113,.55),transparent);
 }
-.fam-sep-dot{font-size:9px;color:var(--olive);letter-spacing:6px}
+.fam-sep-dot{font-size:9px;color:var(--gold);letter-spacing:6px}
 
 @media(prefers-reduced-motion:reduce){
   .fam-medal::before,.fam-medal::after,.fam-medal-orbit{animation:none!important}
@@ -1239,7 +1255,7 @@ section{padding:64px 22px}
 }
 #rsvp > *{position:relative;z-index:1}
 .rsvp-sub{text-align:center;font-size:16px;color:var(--cream);opacity:.85;line-height:1.7;margin:14px 0 26px;font-weight:500}
-.rsvp-dl{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--olive);font-style:italic;font-weight:700}
+.rsvp-dl{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);font-style:italic;font-weight:700}
 
 .rsvp-greet{
   text-align:center;margin:0 auto 26px;max-width:340px;
@@ -1304,7 +1320,7 @@ section{padding:64px 22px}
 /* ── FOOTER ───────────────────────────────────────────── */
 #footer{background:var(--ink2);padding:62px 22px;text-align:center;border-top:1px solid rgba(173,113,113,.12)}
 .ft-orn{color:var(--olive);letter-spacing:12px;font-size:8px;margin-bottom:20px;opacity:.55}
-.ft-nms{font-family:'Great Vibes',cursive;font-size:54px;color:var(--olive);line-height:1.1}
+.ft-nms{font-family:'Great Vibes',cursive;font-size:54px;color:var(--gold);line-height:1.1}
 .ft-dt{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:5px;text-transform:uppercase;color:var(--cream);opacity:.62;font-weight:600;margin-top:20px}
 .ft-note{font-size:13px;color:var(--cream);opacity:.55;margin-top:22px;letter-spacing:1px;line-height:1.7;font-weight:500}
 
@@ -1316,10 +1332,10 @@ section{padding:64px 22px}
   position:relative;overflow:hidden;
 }
 .kp-card::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(to right,transparent,var(--olive),transparent)}
-.kp-icons{display:flex;justify-content:center;gap:28px;margin-bottom:22px;color:var(--olive);opacity:.8}
+.kp-icons{display:flex;justify-content:center;gap:28px;margin-bottom:22px;color:var(--gold);opacity:.9}
 .kp-icons svg{width:30px;height:30px}
 .kp-msg{font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.85;color:var(--cream);opacity:.82;font-style:italic}
-.kp-note{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--olive);opacity:.6;margin-top:18px}
+.kp-note{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.85;margin-top:18px;font-weight:700}
 
 /* ── GIFTS ────────────────────────────────────────────── */
 #gifts{background:var(--ink3)}
@@ -1761,7 +1777,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
     0 3px 16px rgba(173,113,113,.3);
 }
 /* Tamaños sucesivos del número */
-.cd-ring-grid > :nth-child(1) .cd-num{font-size:86px;letter-spacing:-2px;color:var(--olive)}
+.cd-ring-grid > :nth-child(1) .cd-num{font-size:86px;letter-spacing:-2px;color:var(--terra)}
 .cd-ring-grid > :nth-child(2) .cd-num{font-size:68px;letter-spacing:-1.6px;color:var(--gold)}
 .cd-ring-grid > :nth-child(3) .cd-num{font-size:54px;letter-spacing:-1.2px;color:var(--olive-accent)}
 .cd-ring-grid > :nth-child(4) .cd-num{font-size:44px;letter-spacing:-1px;color:var(--gold)}
@@ -1771,7 +1787,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   color:var(--olive);opacity:1;font-weight:700;
 }
 /* Tamaños + alternancia de colores por celda */
-.cd-ring-grid > :nth-child(1) .cd-ring-lbl{font-size:14px;margin-top:16px;color:var(--olive)}
+.cd-ring-grid > :nth-child(1) .cd-ring-lbl{font-size:14px;margin-top:16px;color:var(--terra)}
 .cd-ring-grid > :nth-child(2) .cd-ring-lbl{font-size:13px;margin-top:13px;letter-spacing:3px;color:var(--gold)}
 .cd-ring-grid > :nth-child(3) .cd-ring-lbl{font-size:12px;margin-top:10px;letter-spacing:2.5px;color:var(--olive-accent)}
 .cd-ring-grid > :nth-child(4) .cd-ring-lbl{font-size:11px;margin-top:8px;letter-spacing:2.5px;color:var(--gold)}
@@ -1906,8 +1922,8 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 /* Alternar colores por slide — dorado / rosa / vino */
 .padrino-slide:nth-child(3n+2) .padrino-icon svg{stroke:var(--olive-accent)}
 .padrino-slide:nth-child(3n+2) .padrino-rol{color:var(--olive-accent)}
-.padrino-slide:nth-child(3n) .padrino-icon svg{stroke:var(--olive)}
-.padrino-slide:nth-child(3n) .padrino-rol{color:var(--olive)}
+.padrino-slide:nth-child(3n) .padrino-icon svg{stroke:var(--terra)}
+.padrino-slide:nth-child(3n) .padrino-rol{color:var(--terra)}
 .padrino-rol{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
 .padrino-names{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;line-height:1.6;color:var(--cream)}
 .padrinos-arrow{position:absolute;top:40px;transform:translateY(-50%);width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--gold);z-index:2;padding:0}
@@ -1916,7 +1932,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 .padrinos-arrow.next{right:-8px}
 .padrinos-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
 .padrinos-dots button{width:8px;height:8px;border-radius:50%;border:none;background:rgba(161,122,22,.3);cursor:pointer;padding:0;transition:background .25s,transform .25s}
-.padrinos-dots button.active{background:var(--olive);transform:scale(1.3)}
+.padrinos-dots button.active{background:var(--gold);transform:scale(1.3)}
 
 /* ═══════════════════════════════════════════════════════
    FOTOS FINALES — galería simple antes del footer
@@ -2024,7 +2040,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 }
 .env-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:28px;color:var(--olive);
+  font-size:28px;color:var(--gold);
   font-weight:600;line-height:1.15;letter-spacing:.5px;
 }
 .env-desc{
@@ -2036,7 +2052,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 .env-tap-hint{
   font-family:'Lato',sans-serif;
   font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
-  color:var(--olive);opacity:.85;margin-top:2px;
+  color:var(--gold);opacity:.95;margin-top:2px;
   transition:opacity .3s;
 }
 .gift-envelope.open ~ .env-tap-hint{opacity:0;pointer-events:none}
@@ -2105,21 +2121,31 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
 
 <!-- ═══════════════ 1. HERO ════════════════════════════ -->
 <section id="hero">
-  <!-- Fondo decorativo (sin foto, solo tono crema editorial) -->
+  <!-- Fondo decorativo (sin foto, capas ricas crema/dorado/rosa) -->
   <div class="h-bg-plain" aria-hidden="true"></div>
-  <div class="h-frame"></div>
 
-  <!-- Ondas de viento superior e inferior -->
-  <div class="h-wave h-wave-top" aria-hidden="true">
-    <svg viewBox="0 0 1760 48" preserveAspectRatio="none">
-      <path d="M0,24 Q110,8 220,24 T440,24 T660,24 T880,24 T1100,24 T1320,24 T1540,24 T1760,24" fill="none" stroke="rgba(173,113,113,.38)" stroke-width="1"/>
-      <path d="M0,34 Q110,18 220,34 T440,34 T660,34 T880,34 T1100,34 T1320,34 T1540,34 T1760,34" fill="none" stroke="rgba(173,113,113,.18)" stroke-width=".8"/>
+  <!-- Esquinas ornamentales dorado + rosa -->
+  <div class="h-frame"></div>
+  <div class="h-frame-tr"></div>
+  <div class="h-frame-bl"></div>
+
+  <!-- Arcos decorativos SVG dorado -->
+  <div class="h-arch h-arch-top" aria-hidden="true">
+    <svg viewBox="0 0 400 80" preserveAspectRatio="none">
+      <path d="M20 60 Q200 -10 380 60" class="h-arch-1"/>
+      <path d="M20 70 Q200 8 380 70" class="h-arch-2"/>
+      <circle cx="200" cy="18" r="2.4" class="h-arch-dot"/>
+      <circle cx="120" cy="46" r="1.6" class="h-arch-dot"/>
+      <circle cx="280" cy="46" r="1.6" class="h-arch-dot"/>
     </svg>
   </div>
-  <div class="h-wave h-wave-bot" aria-hidden="true">
-    <svg viewBox="0 0 1760 48" preserveAspectRatio="none">
-      <path d="M0,24 Q110,40 220,24 T440,24 T660,24 T880,24 T1100,24 T1320,24 T1540,24 T1760,24" fill="none" stroke="rgba(173,113,113,.38)" stroke-width="1"/>
-      <path d="M0,14 Q110,30 220,14 T440,14 T660,14 T880,14 T1100,14 T1320,14 T1540,14 T1760,14" fill="none" stroke="rgba(173,113,113,.18)" stroke-width=".8"/>
+  <div class="h-arch h-arch-bot" aria-hidden="true">
+    <svg viewBox="0 0 400 80" preserveAspectRatio="none">
+      <path d="M20 60 Q200 -10 380 60" class="h-arch-1"/>
+      <path d="M20 70 Q200 8 380 70" class="h-arch-2"/>
+      <circle cx="200" cy="18" r="2.4" class="h-arch-dot"/>
+      <circle cx="120" cy="46" r="1.6" class="h-arch-dot"/>
+      <circle cx="280" cy="46" r="1.6" class="h-arch-dot"/>
     </svg>
   </div>
 
@@ -2136,13 +2162,12 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
     <p class="h-we" id="hWe">Nos casamos</p>
 
     <div class="h-div" id="hDiv">
-      <span class="h-div-dot">✦ · ✦</span>
+      <span class="h-div-dot">✦</span>
     </div>
 
     <div class="h-name-wrap">
       <span class="h-name-wind-line"></span>
       <div class="h-clip">
-        <span class="h-ripple" id="rip1" aria-hidden="true"></span>
         <span class="h-name" id="hN1">Alejandra</span>
       </div>
       <span class="h-name-wind-line"></span>
@@ -2151,17 +2176,17 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
     <div class="h-name-wrap">
       <span class="h-name-wind-line"></span>
       <div class="h-clip">
-        <span class="h-ripple" id="rip2" aria-hidden="true"></span>
         <span class="h-name" id="hN2">Francisco</span>
       </div>
       <span class="h-name-wind-line"></span>
     </div>
 
-    <div class="gline" style="margin-top:32px" id="hLine"></div>
-
     <div class="h-date-wrap" id="hDate">
-      <p class="h-date">28 · Noviembre · 2026</p>
-      <p class="h-city">Morelia · Michoacán</p>
+      <p class="h-date-day">28</p>
+      <p class="h-date">Noviembre 2026</p>
+      <div class="h-city-wrap">
+        <p class="h-city">Morelia · Michoacán</p>
+      </div>
     </div>
   </div>
 
@@ -2561,7 +2586,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
   <span class="lbl">Vestimenta</span>
   <h2 class="ttl">Código de Vestimenta</h2>
   <div class="gline"></div>
-  <p class="dc-sub"><em style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--olive);display:block;margin-bottom:10px">Formal · Etiqueta de Jardín</em>Nuestra celebración será al aire libre.<br>El color de tu atuendo es <strong style="color:var(--olive);font-weight:700">libre</strong> — solo te pedimos<br>vestir formal para vivir esta noche en grande.</p>
+  <p class="dc-sub"><em style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold);display:block;margin-bottom:10px">Formal · Etiqueta de Jardín</em>Nuestra celebración será al aire libre.<br>El color de tu atuendo es <strong style="color:var(--terra);font-weight:700">libre</strong> — solo te pedimos<br>vestir formal para vivir esta noche en grande.</p>
   <div class="dc-note" id="dcNote">
     <strong>Una sola excepción:</strong>
     Por favor, evita el color blanco — está reservado para la novia.
@@ -2727,7 +2752,7 @@ section.has-sec-waves{padding-top:84px;padding-bottom:86px}
       </div>
     </div>
     <div class="fg" id="fg4">
-      <button type="submit" class="btn btn-olive" id="rsvpBtn">
+      <button type="submit" class="btn btn-gold" id="rsvpBtn" style="color:#fff">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
         Confirmar asistencia
       </button>
@@ -2892,50 +2917,28 @@ window.addEventListener('scroll', () => {
     (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
 }, { passive: true });
 
-/* ── HERO ANIMATIONS — EFECTO GOTA EN CHARCO ─────────── */
+/* ── HERO ANIMATIONS — REDISEÑO EDITORIAL ─────────── */
 function heroAnim() {
-  // Estados iniciales
-  gsap.set(['#hWe','#hDiv','#hLine','#hDate','#hScroll'], { opacity: 0 });
+  gsap.set(['#hWe','#hDiv','#hDate','#hScroll'], { opacity: 0 });
   gsap.set(['#hN1','#hN2','#hAmp'], {
-    opacity: 0, y: -30, scale: 1.35,
-    filter: 'blur(10px)', transformOrigin: 'center center'
+    opacity: 0, y: 24,
+    filter: 'blur(6px)', transformOrigin: 'center center'
   });
-  gsap.set(['#rip1','#rip2'], { opacity: 0, scale: 0 });
 
-  const drop = (sel, rippleSel) => gsap.timeline()
-    // Caída de la "gota"
-    .to(sel, {
-      opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
-      duration: .95, ease: 'power3.out'
-    })
-    // Pequeño rebote vertical (aplastamiento al tocar el agua)
-    .to(sel, {
-      scaleY: .88, scaleX: 1.06,
-      duration: .16, ease: 'power2.out'
-    }, '-=.08')
-    .to(sel, {
-      scaleY: 1, scaleX: 1,
-      duration: .5, ease: 'elastic.out(1, .55)'
-    })
-    // Onda expansiva simultánea al aplastamiento
-    .fromTo(rippleSel,
-      { opacity: .85, scale: .15 },
-      { opacity: 0, scale: 2.6, duration: 1.2, ease: 'power2.out' },
-      '-=.62'
-    );
+  const rise = (sel) => gsap.to(sel, {
+    opacity: 1, y: 0, filter: 'blur(0px)',
+    duration: 1.05, ease: 'power3.out'
+  });
 
   const tl = gsap.timeline();
   tl
-    .to('#hWe',    { opacity: 1, duration: .7, ease: 'power2.out' }, .1)
-    .to('#hDiv',   { opacity: 1, duration: .5, ease: 'power2.out' }, .3)
-    .add(drop('#hN1', '#rip1'), .55)
-    .add(drop('#hAmp', '#rip1'), 1.2)
-    .add(drop('#hN2', '#rip2'), 1.55)
-    .to('#hLine',  { opacity: .7, duration: .6, ease: 'power2.out' }, 2.6)
-    .to('#hDate',  { opacity: 1, duration: .7, ease: 'power2.out' }, 2.75)
-    .to('#hScroll',{ opacity: 1, duration: .5, ease: 'power2.out' }, 3.1);
-
-  // Hero parallax — eliminado (sin foto de fondo)
+    .to('#hWe',    { opacity: 1, y: 0, duration: .8, ease: 'power2.out' }, .1)
+    .to('#hDiv',   { opacity: 1, duration: .5, ease: 'power2.out' }, .35)
+    .add(rise('#hN1'), .55)
+    .add(rise('#hAmp'), 1.05)
+    .add(rise('#hN2'), 1.35)
+    .to('#hDate',  { opacity: 1, duration: 1, ease: 'power2.out' }, 2.15)
+    .to('#hScroll',{ opacity: 1, duration: .5, ease: 'power2.out' }, 2.65);
 }
 
 /* ── PARTÍCULAS CON FÍSICA — CAEN · REBOTAN BAJO · SE DESVANECEN ── */
