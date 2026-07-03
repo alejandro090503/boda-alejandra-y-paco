@@ -2,8 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#FAF6E7">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <!-- Theme color afinado al crema del hero para camuflar el status bar -->
+  <meta name="theme-color" content="#f9eecf" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f9eecf" media="(prefers-color-scheme: dark)">
+  <!-- Instalada como PWA en iOS → status bar 100% translúcido sobre el contenido -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="A & F">
   <title>Alejandra &amp; Francisco · 28 · Noviembre · 2026</title>
   <meta name="description" content="Alejandra &amp; Francisco · Nuestra boda · 28 de Noviembre 2026 · Morelia">
 
@@ -51,12 +57,13 @@
 
 /* ── RESET ────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overscroll-behavior:none}
 body{
   background:var(--ink);color:var(--cream);
   font-family:'Lato',sans-serif;font-weight:400;
   overflow-x:hidden;max-width:430px;margin:0 auto;
   -webkit-tap-highlight-color:transparent;
+  overscroll-behavior:none;
 }
 section{padding:64px 22px}
 
@@ -208,7 +215,10 @@ section{padding:64px 22px}
 
 /* ── MUSIC BTN ────────────────────────────────────────── */
 .music-btn{
-  position:fixed;bottom:22px;right:22px;width:46px;height:46px;
+  position:fixed;
+  bottom:calc(22px + env(safe-area-inset-bottom));
+  right:calc(22px + env(safe-area-inset-right));
+  width:46px;height:46px;
   border-radius:50%;background:rgba(255,255,255,.85);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border:1px solid var(--gold);color:var(--gold);font-size:18px;
@@ -281,7 +291,15 @@ section{padding:64px 22px}
 #hero{
   min-height:100svh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  position:relative;overflow:hidden;padding:56px 30px 100px;
+  position:relative;overflow:hidden;
+  padding:calc(56px + env(safe-area-inset-top)) 30px calc(100px + env(safe-area-inset-bottom));
+}
+/* Fade superior — camufla el status bar del navegador con el crema del hero */
+#hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:calc(env(safe-area-inset-top) + 26px);
+  background:linear-gradient(to bottom, #f9eecf 0%, #f9eecf 60%, rgba(249,238,207,0) 100%);
+  z-index:5;pointer-events:none;
 }
 
 /* Fondo — capas ricas: crema base + halos dorados/rosados + textura */
