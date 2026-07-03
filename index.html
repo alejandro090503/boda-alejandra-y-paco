@@ -60,10 +60,12 @@ html{background:transparent}
 body{
   background:transparent;color:var(--cream);
   font-family:'Lato',sans-serif;font-weight:400;
-  overflow-x:hidden;max-width:430px;margin:0 auto;
+  overflow-x:hidden;margin:0 auto;
   -webkit-tap-highlight-color:transparent;
   overscroll-behavior:none;
 }
+/* Secciones normales con ancho máximo interno */
+.main-wrap{max-width:430px;margin:0 auto;position:relative}
 section{padding:64px 22px}
 
 /* ── LOADER (inactivo, reemplazado por envelope) ──────── */
@@ -136,8 +138,10 @@ section{padding:64px 22px}
 
 /* ── ENVELOPE OPENING SEQUENCE ────────────────────────── */
 #envelope-screen{
-  position:fixed;inset:0;z-index:9998;
-  background:#b3a393;overflow:hidden;
+  position:fixed;top:0;left:0;
+  width:100vw;height:100vh;height:100dvh;
+  z-index:9998;
+  background:transparent;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;-webkit-tap-highlight-color:transparent;
 }
