@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <!-- NO usamos theme-color: dejamos que Safari haga blur natural del contenido debajo (efecto alexandraycole) -->
-  <!-- Instalada como PWA en iOS → status bar 100% translúcido sobre el contenido -->
+  <!-- Barra del navegador fundida con el diseño (color exacto que toca la barra, se actualiza por JS al abrir y por sección) -->
+  <meta name="theme-color" content="#a89988" id="themeColor">
+  <!-- Modo inmersivo tipo app al guardar en inicio -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="A & F">
   <title>Alejandra &amp; Francisco · 28 · Noviembre · 2026</title>
   <meta name="description" content="Alejandra &amp; Francisco · Nuestra boda · 28 de Noviembre 2026 · Morelia">
@@ -2845,6 +2847,58 @@ function launchPage() {
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 
+/* ── THEME-COLOR · barra del navegador fundida con cada sección ──────
+   Color EXACTO del borde superior de cada sección (medido del CSS real).
+   La barra se repinta según qué sección toca la parte de arriba al hacer scroll,
+   dando sensación de app inmersiva sin bordes de color ajenos. */
+const SECTION_BAR_COLORS = {
+  hero:          '#f9eecf',  /* base del gradiente del hero */
+  neruda:        '#f7ebd2',  /* top del gradiente cita */
+  countdown:     '#faf6e7',  /* --ink2 */
+  location:      '#ffffff',  /* --ink (top) */
+  calendar:      '#d6d3ba',  /* --ink3 */
+  itinerary:     '#fbfbf6',  /* --ink + tenue sage */
+  gifts:         '#d6d3ba',  /* --ink3 */
+  album:         '#ffffff',  /* --ink */
+  dresscode:     '#faf6e7',  /* --ink2 */
+  family:        '#fcf8e6',  /* top del gradiente familia */
+  rsvp:          '#ffffff',  /* --ink (top) */
+  'fotos-final': '#faf6e7',  /* --ink2 */
+  footer:        '#faf6e7'   /* --ink2 */
+};
+let __themeSyncStarted = false;
+function setBarColor(hex){
+  const meta = document.getElementById('themeColor');
+  if (meta && meta.getAttribute('content') !== hex) meta.setAttribute('content', hex);
+}
+function startThemeColorSync(){
+  if (__themeSyncStarted) return;
+  __themeSyncStarted = true;
+  const ids = Object.keys(SECTION_BAR_COLORS);
+  const secs = ids.map(id => document.getElementById(id)).filter(Boolean);
+  // Al abrir, la primera sección visible es el hero
+  setBarColor(SECTION_BAR_COLORS.hero);
+  let ticking = false;
+  function update(){
+    ticking = false;
+    const probe = 3; // px por debajo del borde superior (justo bajo la barra)
+    let active = null;
+    for (let i = 0; i < secs.length; i++){
+      const r = secs[i].getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe){ active = secs[i]; break; }
+    }
+    if (active){
+      const c = SECTION_BAR_COLORS[active.id];
+      if (c) setBarColor(c);
+    }
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking){ ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+}
+
 /* ── ENVELOPE OPENING SEQUENCE ───────────────────────── */
 function initEnvelope() {
   const screen = document.getElementById('envelope-screen');
@@ -2859,6 +2913,7 @@ function initEnvelope() {
     if (wrap) wrap.classList.add('visible');
     if (screen) screen.style.display = 'none';
     launchPage();
+    startThemeColorSync();
     return;
   }
 
@@ -2872,6 +2927,7 @@ function initEnvelope() {
     screen.style.display = 'none';
     wrap.classList.add('visible');
     launchPage();
+    startThemeColorSync();   // barra del navegador empieza a seguir el color de cada sección
     // Disolución del flash revelando la invitación
     gsap.to(flash, {
       opacity: 0, duration: 1.2, ease: 'power2.out', delay: .05,
