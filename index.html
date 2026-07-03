@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <!-- Theme color inicial = color del envelope (se cambia por JS al abrir la invitación) -->
-  <meta name="theme-color" content="#b3a393" id="themeColorMeta">
+  <!-- NO usamos theme-color: dejamos que Safari haga blur natural del contenido debajo (efecto alexandraycole) -->
   <!-- Instalada como PWA en iOS → status bar 100% translúcido sobre el contenido -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -57,15 +56,14 @@
 /* ── RESET ────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overscroll-behavior:none}
+html{background:transparent}
 body{
-  background:#b3a393;color:var(--cream);
+  background:transparent;color:var(--cream);
   font-family:'Lato',sans-serif;font-weight:400;
   overflow-x:hidden;max-width:430px;margin:0 auto;
   -webkit-tap-highlight-color:transparent;
   overscroll-behavior:none;
 }
-/* Cuando la invitación está abierta, body toma el tono crema del hero (menos "flash" al scroll bouncy) */
-body:has(.main-wrap.visible){background:#f9eecf}
 section{padding:64px 22px}
 
 /* ── LOADER (inactivo, reemplazado por envelope) ──────── */
@@ -294,13 +292,6 @@ section{padding:64px 22px}
   align-items:center;justify-content:center;
   position:relative;overflow:hidden;
   padding:calc(56px + env(safe-area-inset-top)) 30px calc(100px + env(safe-area-inset-bottom));
-}
-/* Fade superior — camufla el status bar del navegador con el crema del hero */
-#hero::before{
-  content:'';position:absolute;top:0;left:0;right:0;
-  height:calc(env(safe-area-inset-top) + 26px);
-  background:linear-gradient(to bottom, #f9eecf 0%, #f9eecf 60%, rgba(249,238,207,0) 100%);
-  z-index:5;pointer-events:none;
 }
 
 /* Fondo — capas ricas: crema base + halos dorados/rosados + textura */
@@ -2876,9 +2867,6 @@ function initEnvelope() {
   const revealPage = () => {
     screen.style.display = 'none';
     wrap.classList.add('visible');
-    // Cambio dinámico del theme-color al crema del hero
-    const meta = document.getElementById('themeColorMeta');
-    if (meta) meta.setAttribute('content', '#f9eecf');
     launchPage();
     // Disolución del flash revelando la invitación
     gsap.to(flash, {
