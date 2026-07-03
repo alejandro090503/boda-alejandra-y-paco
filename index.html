@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <!-- Theme color afinado al crema del hero para camuflar el status bar -->
-  <meta name="theme-color" content="#f9eecf" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#f9eecf" media="(prefers-color-scheme: dark)">
+  <!-- Theme color inicial = color del envelope (se cambia por JS al abrir la invitación) -->
+  <meta name="theme-color" content="#b3a393" id="themeColorMeta">
   <!-- Instalada como PWA en iOS → status bar 100% translúcido sobre el contenido -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -59,12 +58,14 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overscroll-behavior:none}
 body{
-  background:var(--ink);color:var(--cream);
+  background:#b3a393;color:var(--cream);
   font-family:'Lato',sans-serif;font-weight:400;
   overflow-x:hidden;max-width:430px;margin:0 auto;
   -webkit-tap-highlight-color:transparent;
   overscroll-behavior:none;
 }
+/* Cuando la invitación está abierta, body toma el tono crema del hero (menos "flash" al scroll bouncy) */
+body:has(.main-wrap.visible){background:#f9eecf}
 section{padding:64px 22px}
 
 /* ── LOADER (inactivo, reemplazado por envelope) ──────── */
@@ -138,7 +139,7 @@ section{padding:64px 22px}
 /* ── ENVELOPE OPENING SEQUENCE ────────────────────────── */
 #envelope-screen{
   position:fixed;inset:0;z-index:9998;
-  background:#fff;overflow:hidden;
+  background:#b3a393;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;-webkit-tap-highlight-color:transparent;
 }
@@ -2875,6 +2876,9 @@ function initEnvelope() {
   const revealPage = () => {
     screen.style.display = 'none';
     wrap.classList.add('visible');
+    // Cambio dinámico del theme-color al crema del hero
+    const meta = document.getElementById('themeColorMeta');
+    if (meta) meta.setAttribute('content', '#f9eecf');
     launchPage();
     // Disolución del flash revelando la invitación
     gsap.to(flash, {
