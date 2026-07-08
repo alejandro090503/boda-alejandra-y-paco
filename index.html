@@ -2970,8 +2970,10 @@ function initEnvelope() {
   const revealPage = () => {
     screen.style.display = 'none';
     wrap.classList.add('visible');
-    launchPage();
-    startThemeColorSync();   // barra del navegador empieza a seguir el color de cada sección
+    // Nunca dejar el flash blanco encima si algo falla: los inicializadores van
+    // en try/catch y la disolución del flash SIEMPRE se ejecuta.
+    try { launchPage(); } catch (e) { console.error('launchPage:', e); }
+    try { startThemeColorSync(); } catch (e) { console.error('themeSync:', e); }
     // Disolución del flash revelando la invitación
     gsap.to(flash, {
       opacity: 0, duration: 1.2, ease: 'power2.out', delay: .05,
@@ -3643,19 +3645,20 @@ function addSectionMedals() {
     'gifts'      : '✦',
     'album'      : '◉',
     'dresscode'  : '❁',
-    'family'     : '❖',
-    'rsvp'       : '✹'
+    'family'     : '❖'
+    /* 'rsvp' omitido: la tarjeta ya tiene su propio ornamento */
   };
   Object.keys(map).forEach(id => {
     const sec = document.getElementById(id);
     if (!sec) return;
     const lbl = sec.querySelector('.lbl');
-    if (!lbl) return;
+    if (!lbl || !lbl.parentNode) return;
     const m = document.createElement('div');
     m.className = 'sec-medal';
     m.innerHTML = `<span>${map[id]}</span>`;
     gsap.set(m, { opacity: 0, scale: .7 });
-    sec.insertBefore(m, lbl);
+    // Insertar SIEMPRE en el contenedor real del .lbl (no asumir hijo directo de la sección)
+    lbl.parentNode.insertBefore(m, lbl);
     ScrollTrigger.create({
       trigger: sec, start: 'top 86%', once: true,
       onEnter() {
