@@ -3692,12 +3692,13 @@ function addCorners() {
 function addWindOrns() {
   document.querySelectorAll('section').forEach(sec => {
     const lbl = sec.querySelector('.lbl');
-    if (!lbl) return;
+    if (!lbl || !lbl.parentNode) return;
     const orn = document.createElement('div');
     orn.className = 'wind-orn';
     orn.textContent = '✦';
     gsap.set(orn, { opacity: 0 });
-    sec.insertBefore(orn, lbl);
+    // Insertar en el contenedor real del .lbl (el RSVP lo tiene anidado en la tarjeta)
+    lbl.parentNode.insertBefore(orn, lbl);
     ScrollTrigger.create({
       trigger: sec, start: 'top 88%', once: true,
       onEnter() { gsap.to(orn, { opacity: 1, duration: 1.2, ease: 'power2.out' }); }
